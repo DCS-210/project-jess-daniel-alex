@@ -1,6 +1,6 @@
 Project proposal
 ================
-Team name
+Team Shoes
 
 ``` r
 library(tidyverse)
@@ -9,6 +9,7 @@ library(broom)
 
 ## 1. Introduction
 
+<<<<<<< HEAD
 Research Question: Which regions are the best in which specific sport?
 After initially discussing what route we wanted to go down with our
 project, scanning through many different websites such as Kaggle, the UK
@@ -79,3 +80,14 @@ around the world. We are looking to use summary statistics as well as
 geom\_bar and geom\_point to show how certain regions excel at certain
 sports. We are excited to get to work on this project and see how the
 project plays out and what findings we have.
+=======
+
+
+## 2\. Data
+
+
+
+## 3\. Data analysis plan
+
+
+>>>>>>> 1ae4841b4de568c5275cbe252364dfab31c1d66d
