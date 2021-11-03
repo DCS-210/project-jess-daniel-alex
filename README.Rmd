@@ -2,10 +2,6 @@
 <<<<<<< HEAD
 title: Team Shoes 
 author: Alex, Dan, Jess 
-=======
-title: Project title
-author: by Team name
->>>>>>> e9bbf1cde17b7c7649f4bdc01771bf175c297573
 output: github_document
 ---
 
