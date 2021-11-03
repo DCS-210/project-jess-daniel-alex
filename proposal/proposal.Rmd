@@ -7,6 +7,7 @@ output: github_document
 ```{r load-packages, message = FALSE}
 library(tidyverse)
 library(broom)
+library(readr)
 ```
 
 ## 1. Introduction
@@ -23,8 +24,8 @@ An idea that we have is to possibly analyze each region then facet it by sport a
 ## 2. Data
 Data: https://www.kaggle.com/divyansh22/summer-olympics-medals
 ```{r load-data, echo = FALSE}
-data1 <- read_csv("Summer-Olympic-medals-1976-to-2008.csv")
-glimpse(data1)
+Summer_Olympics <- read_csv("data/Summer-Olympic-medals-1976-to-2008.csv")
+glimpse(Summer_Olympics)
 ```
 
 After initially discussing what route we wanted to go down with our project, scanning through many different websites such as Kaggle, the UK Gov data and the Harvard dataverse, we eventually stumbled upon a very cool dataset about Summer Olympic medal winners between the years of 1976 to 2008. The dataset has 11 variables, ranging from type of sport, type of medal won, country of athlete and many more. Our plan of action will involve breaking down the data into countries and eventually breaking it down into continents and which continents excel at which sports specifically.
