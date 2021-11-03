@@ -11,7 +11,6 @@ library(broom)
 
 ## 1. Introduction
 
-<<<<<<< HEAD
 Research Question: Which regions are the best in which specific sport?
 After initially discussing what route we wanted to go down with our project, scanning through many different websites such as Kaggle, the UK Gov data and the Harvard dataverse, we eventually stumbled upon a very cool dataset about Summer Olympic medal winners between the years of 1976 to 2008. The dataset has 11 variables, ranging from type of sport, type of medal won, country of athlete and many more. Our plan of action will involve breaking down the data into countries and eventually breaking it down into continents and which continents excel at which sports specifically.
 
@@ -28,15 +27,12 @@ data1 <- read_csv("Summer-Olympic-medals-1976-to-2008.csv")
 glimpse(data1)
 ```
 
-
-=======
 After initially discussing what route we wanted to go down with our project, scanning through many different websites such as Kaggle, the UK Gov data and the Harvard dataverse, we eventually stumbled upon a very cool dataset about Summer Olympic medal winners between the years of 1976 to 2008. The dataset has 11 variables, ranging from type of sport, type of medal won, country of athlete and many more. Our plan of action will involve breaking down the data into countries and eventually breaking it down into continents and which continents excel at which sports specifically.
 
 ## 2. Data
 ```{r}
 head(Summer_Olympics)
 ```
->>>>>>> 1ae4841b4de568c5275cbe252364dfab31c1d66d
 ## 3. Data analysis plan
 The variables we will be using are medals, region (which we will create), country and possibly a few more. We are looking to see which regions of the world are the best at which sports, and how they differ around the world. We are looking to use summary statistics as well as geom_bar and geom_point to show how certain regions excel at certain sports. We are excited to get to work on this project and see how the project plays out and what findings we have.
 
