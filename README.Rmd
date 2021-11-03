@@ -21,22 +21,15 @@ And make sure to hide your code with  `echo = FALSE` unless the point you are tr
 Your results with proper output and graphics go in your presentation, this space is for a brief summary of your project.
 
 ```{r load-data, echo = FALSE}
-<<<<<<< HEAD
 # load data here, if you like
-=======
 data1 <- read_csv("Summer-Olympic-medals-1976-to-2008.csv")
->>>>>>> e9bbf1cde17b7c7649f4bdc01771bf175c297573
 ```
 
 ## Presentation
 
 Our presentation can be found [here](presentation/presentation.html).
 
-<<<<<<< HEAD
-## Data 
-=======
 ## Data
->>>>>>> e9bbf1cde17b7c7649f4bdc01771bf175c297573
 
 Include a citation for your data here. 
 See http://libraryguides.vu.edu.au/c.php?g=386501&p=4347840 for guidance on proper citation for datasets. 
