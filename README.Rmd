@@ -1,6 +1,6 @@
 ---
-title: Project title
-author: by Team name
+title: Team Shoes 
+author: Alex, Dan, Jess 
 output: github_document
 ---
 
