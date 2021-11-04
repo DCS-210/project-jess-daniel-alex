@@ -1,0 +1,30 @@
+---
+title: "Data Analysis"
+output: html_document
+---
+
+```{r importing-data}
+Summer_olympics <- read_csv("data/Summer-Olympic-medals-1976-to-2008.csv")
+Country_codes <- read_csv("data/coutry-and-continent-codes.csv")
+```
+
+```{r augmenting-data}
+#names(Country_codes)[names(Country_codes) == 'Three_Letter_Country_Code'] <- 'Country_code'
+Olympics_complete<-Summer_Olympics %>%
+  left_join(Country_codes, by="Country_code") %>%
+  mutate(Medal_value = case_when(
+    Medal == "Gold" ~ 3,
+    Medal == "Silver"    ~ 2,
+    Medal == "Bronze" ~ 1
+    )) 
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

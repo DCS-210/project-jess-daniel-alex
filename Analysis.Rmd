@@ -1,11 +1,10 @@
 ---
-title: "DataAnalysis"
+title: "Data Analysis"
 output: html_document
 ---
 
-```{r fixing-data}
-Summer_olympics <- read_csv("data/Summer-Olympic-medals-1976-to-2008.csv")
-Country_codes <- read_csv("data/coutry-and-continent-codes.csv")
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## R Markdown

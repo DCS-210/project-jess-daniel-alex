@@ -21,7 +21,8 @@ And make sure to hide your code with  `echo = FALSE` unless the point you are tr
 Your results with proper output and graphics go in your presentation, this space is for a brief summary of your project.
 
 ```{r load-data, echo = FALSE}
-Summer_Olympics <- read_csv("data/Summer-Olympic-medals-1976-to-2008.csv")
+Summer_olympics <- read_csv("data/Summer-Olympic-medals-1976-to-2008.csv")
+Country_codes <- read_csv("data/coutry-and-continent-codes.csv")
 ```
 
 ## Presentation
