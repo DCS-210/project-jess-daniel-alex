@@ -3,11 +3,6 @@ title: "Data Analysis"
 output: html_document
 ---
 
-```{r importing-data}
-Summer_olympics <- read_csv("data/Summer-Olympic-medals-1976-to-2008.csv")
-Country_codes <- read_csv("data/coutry-and-continent-codes.csv")
-```
-
 ```{r augmenting-data}
 #names(Country_codes)[names(Country_codes) == 'Three_Letter_Country_Code'] <- 'Country_code'
 Olympics_complete<-Summer_Olympics %>%
@@ -17,6 +12,20 @@ Olympics_complete<-Summer_Olympics %>%
     Medal == "Silver"    ~ 2,
     Medal == "Bronze" ~ 1
     )) 
+```
+```{r}
+Summer_Olympic_medals_1976_to_2008 %>%
+  
+ggplot(aes(x = Year, y = Country, fill = Medal)) +
+  geom_col(position = "fill") 
+ scale_x_discrete(expand = c(0, 170)) +
+```
+
+```{r}
+Summer_Olympic_medals_1976_to_2008 %>%
+  ggplot(mapping = aes(x = Year)) +
+  geom_histogram(binwidth = 5000) +
+  facet_wrap( ~ Country, ncol = 100)
 ```
 
 ## Including Plots
