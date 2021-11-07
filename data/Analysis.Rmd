@@ -13,12 +13,12 @@ Olympics_complete<-Summer_Olympics %>%
     Medal == "Bronze" ~ 1
     )) 
 ```
+
 ```{r}
 Summer_Olympic_medals_1976_to_2008 %>%
-  
-ggplot(aes(x = Year, y = Country, fill = Medal)) +
+  ggplot(aes(x = Year, y = Country, fill = Medal)) +
   geom_col(position = "fill") 
- scale_x_discrete(expand = c(0, 170)) +
+  scale_x_discrete(expand = c(0, 170)) +
 ```
 
 ```{r}
