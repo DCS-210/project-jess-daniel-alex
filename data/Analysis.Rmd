@@ -27,10 +27,13 @@ Olympic_final %>%
 
 ```{r}
 Olympic_final %>%
+  group_by(Country) %>%
+  top_n(n = 5, Medal_value)) 
    filter(Continent_Name == "Europe") %>%
   ggplot(aes(x = Country, y = Medal_value, fill=Medal)) +
   geom_col()  +
   facet_wrap(~ "Continent_Name")
+  
 ```
 
 ## Including Plots
