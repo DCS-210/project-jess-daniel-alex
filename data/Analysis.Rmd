@@ -3,6 +3,11 @@ title: "Data Analysis"
 output: html_document
 ---
 
+```{r upload-data}
+Summer_Olympics <- read_csv("Summer-Olympic-medals-1976-to-2008.csv")
+coutry_and_continent_codes <- read_csv("coutry-and-continent-codes.csv")
+```
+
 ```{r augmenting-data}
 #names(Country_codes)[names(Country_codes) == 'Three_Letter_Country_Code'] <- 'Country_code'
 Olympics_complete<-Summer_Olympics %>%
