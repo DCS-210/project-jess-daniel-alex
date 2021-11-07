@@ -18,10 +18,11 @@ Olympic_final <- Summer_olympics %>%
 ```
 
 ```{r}
-Summer_Olympic_medals_1976_to_2008 %>%
-  ggplot(aes(x = Year, y = Country, fill = Medal)) +
-  geom_col(position = "fill") 
-  scale_x_discrete(expand = c(0, 170)) +
+Olympic_final %>%
+   filter(Continent_Name == "North America") %>%
+  ggplot(aes(x = Country, y = Medal_value, fill=Medal)) +
+  geom_col()  +
+  facet_wrap(~ "Continent_Name")
 ```
 
 ```{r}
