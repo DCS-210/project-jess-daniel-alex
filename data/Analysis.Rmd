@@ -26,10 +26,11 @@ Olympic_final %>%
 ```
 
 ```{r}
-Summer_Olympic_medals_1976_to_2008 %>%
-  ggplot(mapping = aes(x = Year)) +
-  geom_histogram(binwidth = 5000) +
-  facet_wrap( ~ Country, ncol = 100)
+Olympic_final %>%
+   filter(Continent_Name == "Europe") %>%
+  ggplot(aes(x = Country, y = Medal_value, fill=Medal)) +
+  geom_col()  +
+  facet_wrap(~ "Continent_Name")
 ```
 
 ## Including Plots
