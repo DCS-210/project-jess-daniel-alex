@@ -4,19 +4,17 @@ output: html_document
 ---
 
 ```{r upload-data}
-Summer_Olympics <- read_csv("Summer-Olympic-medals-1976-to-2008.csv")
-coutry_and_continent_codes <- read_csv("coutry-and-continent-codes.csv")
+Summer_olympics <- read_csv("Summer-Olympic-medals-1976-to-2008.csv")
+Country_codes <- read_csv("coutry-and-continent-codes.csv")
 ```
 
 ```{r augmenting-data}
 #names(Country_codes)[names(Country_codes) == 'Three_Letter_Country_Code'] <- 'Country_code'
-Olympics_complete <- Summer_Olympics %>%
-  left_join(Country_codes, by = "Country_code") %>%
-    mutate(Medal_value = case_when(
+Summer_olympics %>%
+  left_join(Country_codes, by = c("Country_Code" = "Three_Letter_Country_Code")) %>% mutate(Medal_value = case_when(
       Medal == "Gold" ~ 3,
-      Medal == "Silver"    ~ 2,
-      Medal == "Bronze" ~ 1
-    )) 
+      Medal == "Silver" ~ 2,
+      Medal == "Bronze" ~ 1))
 ```
 
 ```{r}
