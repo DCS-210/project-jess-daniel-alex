@@ -28,11 +28,13 @@ Olympic_final %>%
 ```{r}
 Olympic_final %>%
   group_by(Country, Medal_value) %>%
-  top_n(n = 5, Country) %>%
-  filter(Continent_Name == "Europe") %>%
-  ggplot(aes(x = Country, y = Medal_value, fill=Medal)) +
+  mutate(Total_medals = sum(Medal_value),
+         Country = as.factor(Country)) %>%
+  filter(Continent_Name == "Europe", Total_medals > 100) %>%
+  ggplot(aes(x = fct_reorder(Country, Total_medals), y =  Medal_value,    fill = fct_relevel(Medal, c("Gold", "Silver", "Bronze")))) +
   geom_col()  +
-  facet_wrap(~ "Continent_Name")
+  facet_wrap(~ "Continent_Name") + 
+  coord_flip()
   
 ```
 
