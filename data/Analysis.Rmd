@@ -58,7 +58,21 @@ Olympic_final %>%
    facet_wrap(~ Country)
 
 ```
+```{r summarising-medals}
+Olympic_collapse <- Olympic_final %>%
+  group_by(Country) %>%
+  mutate(
+  Bronze = sum(str_count(Medal, "Bronze")),
+  Silver = sum(str_count(Medal, "Silver")),
+  Gold = sum(str_count(Medal, "Gold"))) 
 
+Olympic_collapse %>%
+  group_by(Country) %>%
+  summarise(Country, Bronze, Silver, Gold)
+
+
+
+```
 
 ## Including Plots
 
