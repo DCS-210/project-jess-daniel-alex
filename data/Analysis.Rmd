@@ -41,6 +41,17 @@ Olympic_final %>%
    coord_flip()
 ```
 
+
+```{r}
+
+Olympic_final %>%
+   filter(Country == "France", "United Kingdom") %>%
+  ggplot(aes(x = Year, y = Medal_value)) + 
+  geom_bar()
+
+```
+
+
 ## Including Plots
 
 You can also embed plots, for example:
