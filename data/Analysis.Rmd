@@ -3,6 +3,14 @@ title: "Data Analysis"
 output: html_document
 ---
 
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+library(broom)
+library(readr)
+```
+
+
 ```{r upload-data}
 Summer_olympics <- read_csv("Summer-Olympic-medals-1976-to-2008.csv")
 Country_codes <- read_csv("coutry-and-continent-codes.csv")
