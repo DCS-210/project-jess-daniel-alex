@@ -54,7 +54,8 @@ Olympic_final %>%
 Olympic_final %>%
   filter(Country == c("France", "United Kingdom")) %>%
    ggplot(aes(x = Year, y = Medal_value)) + 
-  geom_(aes(mapping = "Aquatics"))
+   geom_col() +
+   facet_wrap(~ Country)
 
 ```
 
