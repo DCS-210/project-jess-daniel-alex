@@ -27,7 +27,7 @@ Olympic_final %>%
 
 ```{r}
 Olympic_final %>%
-  group_by(Country, Medal_value) %>%
+  group_by(Country, total_medal) %>%
   top_n(n = 5, Country) %>%
   filter(Continent_Name == "Europe") %>%
   ggplot(aes(x = Country, y = Medal_value, fill=Medal)) +
