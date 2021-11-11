@@ -38,21 +38,6 @@ Olympic_final %>%
   facet_wrap(~ "Continent_Name")
 ```
 
-```{r filter_data_and_Europe_graph}
-Olympic_final %>%
-   group_by(Country, Medal_value) %>%
-   top_n(n = 5, Country) %>%
-   filter(Continent_Name == "Europe") %>%
-   ggplot(aes(x = Country, y = Medal_value, fill=Medal)) +
-   mutate(Total_medals = sum(Medal_value),
-          Country = as.factor(Country)) %>%
-   filter(Continent_Name == "Europe", Total_medals > 100) %>%
-   ggplot(aes(x = fct_reorder(Country, Total_medals), y =  Medal_value,    fill = fct_relevel(Medal, c("Gold", "Silver", "Bronze")))) +
-   geom_col()  +
-   facet_wrap(~ "Continent_Name")
-   facet_wrap(~ "Continent_Name") + 
-   coord_flip()
-```
 
 ```{r USA_aquatics}
 Olympic_final %>%
@@ -67,7 +52,7 @@ Olympic_final %>%
 
 
 ```{r France_UK_graph}
-Olympic_aquatics %>%
+Olympic_final %>%
    filter(Country == c("France", "United Kingdom")) %>%
    ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
    labs(x = "Year", y = "Total Medal Values", 
@@ -100,14 +85,6 @@ Olympic_collapse <- Olympic_final %>%
   count() %>%
   pivot_wider(names_from = Medal, values_from = n) %>%
   mutate()
-```
-
-
-
-```{r test-plot-why-why-why}
-Olympic_collapse %>%
-   ggplot(aes(x=Country, y = Gold)) +
-   geom_col()
 ```
 
 
