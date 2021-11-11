@@ -19,12 +19,16 @@ Country_codes <- read_csv("coutry-and-continent-codes.csv")
 ```{r augmenting-data}
 #names(Country_codes)[names(Country_codes) == 'Three_Letter_Country_Code'] <- 'Country_code'
 Olympic_final <- Summer_olympics %>%
-  left_join(Country_codes, by = c("Country_Code" = "Three_Letter_Country_Code")) %>% mutate(Medal_value = case_when(
+   left_join(
+      Country_codes, 
+      by = c("Country_Code" = "Three_Letter_Country_Code") ) %>%
+   mutate(
+      Medal_value = case_when(
       Medal == "Gold" ~ 3,
       Medal == "Silver" ~ 2,
       Medal == "Bronze" ~ 1)) %>%
-      filter(Year == c(1996, 2000, 2004, 2008))
-  )
+   filter(Year == c(1996, 2000, 2004, 2008))
+  
 ```
 
 ```{r}
@@ -71,13 +75,21 @@ Olympic_collapse <- Olympic_final %>%
   Silver = sum(str_count(Medal, "Silver")),
   Gold = sum(str_count(Medal, "Gold"))) %>%
    select(Country, Medal) 
-   
+```
+
+```{r test}   
 #Making the data easy to read
 Olympic_collapse <- setDT(Olympic_collapse) %>%
-   dcast(Country~Medal, length) %>%
+   dcast(Country ~ Medal, length) %>%
    group_by(Country, Bronze, Silver, Gold) %>%
    tally() %>%
-   select(Country, Bronze, Silver, Gold)
+   select(Country, Bronze, Silver, Gold) 
+```
+
+```{r test-plot-why-why-why}
+Olympic_collapse %>%
+   ggplot(aes(x=Country, y = Gold)) +
+   geom_col()
 ```
 ## Including Plots
 
