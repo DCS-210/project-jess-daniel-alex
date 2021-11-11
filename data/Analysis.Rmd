@@ -52,13 +52,14 @@ Olympic_final %>%
 ```
 
 
-```{r}
+```{r France_UK_graph}
 Olympic_final %>%
   filter(Country == c("France", "United Kingdom")) %>%
-   ggplot(aes(x = Year, y = Medal_value)) + 
+   ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
+   labs(x = "Year", y = "Total Medal Values", 
+   title = "Total Medal Value for France and UK") +
    geom_col() +
    facet_wrap(~ Country)
-
 ```
 
 ```{r summarising-medals}
