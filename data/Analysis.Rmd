@@ -61,6 +61,19 @@ Olympic_final %>%
    facet_wrap(~ Country)
 ```
 
+
+```{Jess-swimming-graph-attempt}
+Olympic_final <- Olympic_final %>%
+   filter(Country == c("France", "United Kingdom"),
+          Sport == "Aquatics") %>%
+   ggplot(aes(x = Year, y = Medal_value) + 
+   geom_col() +
+   facet_wrap(~ Country) +
+   labs(title = "Olympic Aquatics"))
+```
+
+
+
 ```{r summarising-medals}
 #Creating Bronze, Silver, and Gold columns and removing excess
 Olympic_collapse <- Olympic_final %>%
