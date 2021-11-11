@@ -47,12 +47,13 @@ Olympic_final %>%
    labs(x = "Year", y = "Total Medal Values", 
    title = "Total Medal Value for USA") +
    geom_col() +
-   facet_wrap(~ Country)
+   axis(at = seq(1996,2008, by = 4))
+   
 ```
 
 
 ```{r France_UK_graph}
-Olympic_final %>%
+Olympic_aquatics %>%
    filter(Country == c("France", "United Kingdom")) %>%
    ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
    labs(x = "Year", y = "Total Medal Values", 
@@ -61,15 +62,7 @@ Olympic_final %>%
    facet_wrap(~ Country)
 ```
 
-```{Jess-swimming-graph-attempt}
-Olympic_final <- Olympic_final %>%
-   filter(Country == c("France", "United Kingdom"),
-          Sport == "Aquatics") %>%
-   ggplot(aes(x = Year, y = Medal_value) + 
-   geom_col() +
-   facet_wrap(~ Country) +
-   labs(title = "Olympic Aquatics"))
-```
+
 
 
 ```{r summarising-medals}
