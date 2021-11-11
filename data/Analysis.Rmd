@@ -24,7 +24,6 @@ Olympic_final <- Summer_olympics %>%
       Medal == "Silver" ~ 2,
       Medal == "Bronze" ~ 1)) %>%
       filter(Year == c(1996, 2000, 2004, 2008))
-  )
 ```
 
 ```{r}
@@ -35,7 +34,7 @@ Olympic_final %>%
   facet_wrap(~ "Continent_Name")
 ```
 
-```{r}
+```{r filter_data&Europe_graph}
 Olympic_final %>%
    group_by(Country, Medal_value) %>%
    top_n(n = 5, Country) %>%
