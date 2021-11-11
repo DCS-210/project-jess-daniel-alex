@@ -38,6 +38,15 @@ Olympic_final %>%
   facet_wrap(~ "Continent_Name")
 ```
 
+```{r France_UK_graph_Total_Medals}
+Olympic_aquatics %>%
+   filter(Country == c("France", "United Kingdom")) %>%
+   ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
+   labs(x = "Year", y = "Total Medal Values", 
+   title = "Total Medal Value for France and UK") +
+   geom_col() +
+   facet_wrap(~ Country)
+```
 
 ```{r UK_aquatics}
 Olympic_final %>%
@@ -61,20 +70,6 @@ Olympic_final %>%
    geom_col() +
    axis(at = seq(1996,2008, by = 4))
 ```
-
-
-
-```{r France_UK_graph_Total_Medals}
-Olympic_aquatics %>%
-   filter(Country == c("France", "United Kingdom")) %>%
-   ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
-   labs(x = "Year", y = "Total Medal Values", 
-   title = "Total Medal Value for France and UK") +
-   geom_col() +
-   facet_wrap(~ Country)
-```
-
-
 
 
 ```{r summarising-medals}
