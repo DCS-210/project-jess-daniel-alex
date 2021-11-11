@@ -63,35 +63,85 @@ Olympic_final %>%
   facet_wrap(~ "Continent_Name")
 ```
 
+```{r Russia_US_graph_Total_Medals}
+Olympic_final %>%
+   filter(Country == c("United States", "Russia")) %>%
+   ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
+   labs(x = "Year", y = "Total Medal Values", 
+   title = "Total Medal Value for USA and Russia") +
+   geom_col() +
+   facet_wrap(~ Country)
+```
 
-```{r USA_aquatics}
+```{r US_aquatics}
 Olympic_final %>%
    filter(Sport == "Aquatics") %>%
    filter(Country == "United States") %>%
    ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
    labs(x = "Year", y = "Total Medal Values", 
-   title = "Total Medal Value for USA") +
+   title = "Total Medal Count for Aquatics for the United States") +
    geom_col() +
-   facet_wrap(~ Country)
+   scale_x_continuous(breaks = seq(1996,2008, by = 4), labels = c("1996", "2000", "2004", "2008"))
+   
 ```
 
-
-```{r France_UK_graph}
+```{r China_Aquatics}
 Olympic_final %>%
-   filter(Country == c("France", "United Kingdom")) %>%
+   filter(Sport == "Aquatics") %>%
+   filter(Country == "Russia") %>%
    ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
    labs(x = "Year", y = "Total Medal Values", 
-   title = "Total Medal Value for France and UK") +
+   title = "Total Medal Count for Aquatics for Russia") +
    geom_col() +
-   facet_wrap(~ Country)
+   scale_x_continuous(breaks = seq(1996,2008, by = 4), labels = c("1996", "2000", "2004", "2008"))
+  
 ```
 
-```{Jess-swimming-graph-attempt}
-Olympic_final <- Olympic_final %>%
-   filter(Country == c("France", "United Kingdom"),
-          Sport == "Aquatics") %>%
-   ggplot(aes(x = Year, y = Medal_value) + 
+```{r US_athletics}
+Olympic_final %>%
+   filter(Sport == "Athletics") %>%
+   filter(Country == "United States") %>%
+   ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
+   labs(x = "Year", y = "Total Medal Values", 
+   title = "Total Medal Count for Athletics for the United States") +
    geom_col() +
-   facet_wrap(~ Country) +
-   labs(title = "Olympic Aquatics"))
+   scale_x_continuous(breaks = seq(1996,2008, by = 4), labels = c("1996", "2000", "2004", "2008"))
+
+```
+
+```{r Jamaica_athletics}
+Olympic_final %>%
+   filter(Sport == "Athletics") %>%
+   filter(Country == "Jamaica") %>%
+   ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
+   labs(x = "Year", y = "Total Medal Values", 
+   title = "Total Medal Count for Athletics for Jamaica") +
+   geom_col() +
+   scale_x_continuous(breaks = seq(1996,2008, by = 4), labels = c("1996", "2000", "2004", "2008"))
+```
+
+```{r US_Rowing}
+Olympic_final %>%
+   filter(Sport == "Rowing") %>%
+   filter(Country == "United States") %>%
+   ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
+   labs(x = "Year", y = "Total Medal Values", 
+   title = "Total Medal Count for Rowing for the United States") +
+   geom_col() +
+   scale_x_continuous(breaks = seq(1996,2008, by = 4), labels = c("1996", "2000", "2004", "2008"))
+
+```
+
+
+```{r UK_Rowing}
+Olympic_final %>%
+   filter(Sport == "Rowing") %>%
+   filter(Country == "United Kingdom") %>%
+   ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
+   labs(x = "Year", y = "Total Medal Values", 
+   title = "Total Medal Count for Rowing for the United Kingdom") +
+   geom_col() +
+   scale_x_continuous(breaks = seq(1996,2008, by = 4), labels = c("1996", "2000", "2004", "2008"))
+
+```
 ```
