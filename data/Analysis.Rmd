@@ -39,20 +39,32 @@ Olympic_final %>%
 ```
 
 
-```{r USA_aquatics}
+```{r UK_aquatics}
 Olympic_final %>%
    filter(Sport == "Aquatics") %>%
-   filter(Country == "United States") %>%
+   filter(Country == "United Kingdom") %>%
    ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
    labs(x = "Year", y = "Total Medal Values", 
-   title = "Total Medal Value for USA") +
+   title = "Total Medal Count for Aquatics for United Kingdom") +
    geom_col() +
    axis(at = seq(1996,2008, by = 4))
    
 ```
 
+```{r France_Aquatics}
+Olympic_final %>%
+   filter(Sport == "Aquatics") %>%
+   filter(Country == "France") %>%
+   ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
+   labs(x = "Year", y = "Total Medal Values", 
+   title = "Total Medal Count for Aquatics for France") +
+   geom_col() +
+   axis(at = seq(1996,2008, by = 4))
+```
 
-```{r France_UK_graph}
+
+
+```{r France_UK_graph_Total_Medals}
 Olympic_aquatics %>%
    filter(Country == c("France", "United Kingdom")) %>%
    ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
