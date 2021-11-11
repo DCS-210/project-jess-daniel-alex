@@ -73,7 +73,29 @@ Olympic_collapse %>%
 
 
 ```
+```{r summarising-medals}
+Olympic_collapse <- Olympic_final %>%
+  group_by(Country) %>%
+   mutate(Gold = select("Gold", Country), na.rm = TRUE)
 
+
+```
+```{r summarising-medals}
+#Creating Bronze, Silver, and Gold columns and removing excess
+Olympic_collapse <- Olympic_final %>%
+  group_by(Country) %>%
+  mutate(
+  Bronze = sum(str_count(Medal, "Bronze")),
+  Silver = sum(str_count(Medal, "Silver")),
+  Gold = sum(str_count(Medal, "Gold"))) %>%
+   select(Country, Medal) 
+   
+#Making the data easy to read
+Olympic_collapse <- dcast(setDT(Olympic_collapse), Country~Medal, length) %>%
+   group_by(Country, Bronze, Silver, Gold) %>%
+   tally() %>%
+   select(Country, Bronze, Silver, Gold)
+```
 ## Including Plots
 
 You can also embed plots, for example:
