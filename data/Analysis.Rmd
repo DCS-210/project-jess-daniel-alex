@@ -95,18 +95,13 @@ Olympic_collapse <- Olympic_final %>%
   Bronze = sum(str_count(Medal, "Bronze")),
   Silver = sum(str_count(Medal, "Silver")),
   Gold = sum(str_count(Medal, "Gold"))) %>%
-   select(Country, Medal) 
+  select(Country, Medal) %>%
+  group_by(Country, Medal) %>%
+  count() %>%
+  pivot_wider(names_from = Medal, values_from = n) %>%
+  mutate()
 ```
 
-
-```{r summarising-medals2}
-#Making the data easy to read
-Olympic_collapse %>%
-   group_by(Country, Medal) %>%
-   count() %>%
-   pivot_wider(names_from = Medal, values_from = freq) %>%
-   mutate()
-```
 
 
 ```{r test-plot-why-why-why}
