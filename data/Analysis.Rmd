@@ -72,6 +72,19 @@ Olympic_aquatics %>%
    facet_wrap(~ Country)
 ```
 
+
+```{Jess-swimming-graph-attempt}
+Olympic_final <- Olympic_final %>%
+   filter(Country == c("France", "United Kingdom"),
+          Sport == "Aquatics") %>%
+   ggplot(aes(x = Year, y = Medal_value) + 
+   geom_col() +
+   facet_wrap(~ Country) +
+   labs(title = "Olympic Aquatics"))
+```
+
+
+
 ```{r summarising-medals}
 #Creating Bronze, Silver, and Gold columns and removing excess
 Olympic_collapse <- Olympic_final %>%
@@ -85,11 +98,11 @@ Olympic_collapse <- Olympic_final %>%
 
 ```{r summarising-medals2}
 #Making the data easy to read
-Olympic_collapse <- setDT(Olympic_collapse) %>%
-   dcast(Country~Medal, length) %>%
-   group_by(Country, Bronze, Silver, Gold) %>%
-   tally() %>%
-   select(Country, Bronze, Silver, Gold)
+Olympic_collapse %>%
+   group_by(Country, Medal) %>%
+   count() %>%
+   pivot_wider(names_from = Medal, values_from = freq) %>%
+   mutate()
 ```
 ## Including Plots
 
