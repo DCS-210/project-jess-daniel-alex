@@ -77,7 +77,7 @@ Olympic_collapse <- Olympic_final %>%
   group_by(Country, Medal) %>%
   count() %>%
   pivot_wider(names_from = Medal, values_from = n) %>%
-  mutate()
+  mutate_all(~replace(., is.na(.), 0))
 ```
 
 
