@@ -23,17 +23,8 @@ Olympic_final <- Summer_olympics %>%
       Medal == "Gold" ~ 3,
       Medal == "Silver" ~ 2,
       Medal == "Bronze" ~ 1)) %>%
-      select(Year >= 1996)
-   
-    mutate(day_of_week = case_when(
-    Country == "East Germany" ~ "Germany",
-    day_of_week == "Tuesday" ~ "Weekday",
-    day_of_week == "Wednesday" ~ "Weekday",
-    day_of_week == "Thursday" ~ "Weekday",
-    day_of_week == "Friday" ~ "Weekday",
-    day_of_week == "Saturday" ~ "Weekend",
-    day_of_week == "Sunday" ~ "Weekend"
-  ))
+      filter(Year == c(1996, 2000, 2004, 2008))
+  )
 ```
 
 ```{r}
