@@ -26,7 +26,7 @@ Olympic_final <- Summer_olympics %>%
       filter(Year == c(1996, 2000, 2004, 2008))
 ```
 
-```{r}
+```{r NA_graph}
 Olympic_final %>%
    filter(Continent_Name == "North America") %>%
   ggplot(aes(x = Country, y = Medal_value, fill=Medal)) +
