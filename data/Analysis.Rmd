@@ -19,11 +19,15 @@ Country_codes <- read_csv("coutry-and-continent-codes.csv")
 ```{r augmenting-data}
 #names(Country_codes)[names(Country_codes) == 'Three_Letter_Country_Code'] <- 'Country_code'
 Olympic_final <- Summer_olympics %>%
-  left_join(Country_codes, by = c("Country_Code" = "Three_Letter_Country_Code")) %>% mutate(Medal_value = case_when(
+   left_join(
+      Country_codes, 
+      by = c("Country_Code" = "Three_Letter_Country_Code") ) %>%
+   mutate(
+      Medal_value = case_when(
       Medal == "Gold" ~ 3,
       Medal == "Silver" ~ 2,
       Medal == "Bronze" ~ 1)) %>%
-      filter(Year == c(1996, 2000, 2004, 2008))
+   filter(Year == c(1996, 2000, 2004, 2008))
 ```
 
 ```{r NA_graph}
@@ -72,7 +76,6 @@ Olympic_aquatics %>%
    facet_wrap(~ Country)
 ```
 
-
 ```{Jess-swimming-graph-attempt}
 Olympic_final <- Olympic_final %>%
    filter(Country == c("France", "United Kingdom"),
@@ -82,7 +85,6 @@ Olympic_final <- Olympic_final %>%
    facet_wrap(~ Country) +
    labs(title = "Olympic Aquatics"))
 ```
-
 
 
 ```{r summarising-medals}
@@ -96,6 +98,7 @@ Olympic_collapse <- Olympic_final %>%
    select(Country, Medal) 
 ```
 
+
 ```{r summarising-medals2}
 #Making the data easy to read
 Olympic_collapse %>%
@@ -104,6 +107,15 @@ Olympic_collapse %>%
    pivot_wider(names_from = Medal, values_from = freq) %>%
    mutate()
 ```
+
+
+```{r test-plot-why-why-why}
+Olympic_collapse %>%
+   ggplot(aes(x=Country, y = Gold)) +
+   geom_col()
+```
+
+
 ## Including Plots
 
 You can also embed plots, for example:
