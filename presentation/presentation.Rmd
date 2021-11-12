@@ -1,9 +1,9 @@
 ---
-title: "Presentation title"
+title: "Analysis of Olypics Results 1996-1008"
 subtitle: "Presentation subtitle (if any)"
-author: "Team name <br> Names of team members"
-institute: "University of Edinburgh"
-date: "`r Sys.Date()`"
+author: "By: Alex, Dan, Jess"
+institute: "DCS 210"
+date: "17th November 2021"
 output:
   xaringan::moon_reader:
     css: xaringan-themer.css
@@ -30,7 +30,9 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 ```
 
 ```{r load-data, include=FALSE}
-# Load your data here
+library(tidyverse)
+library(broom)
+library(readr)
 ```
 
 ```{r}
@@ -42,13 +44,19 @@ style_xaringan(
 
 class: center, middle
 
-## A statement of the overall goal / research question
+## Introduction page
+
+- research question 
+- data where we got it
 
 ---
 
 class: inverse, center, middle
 
-# Section title
+## What sections/topics we decided to anaylze 
+
+- Comparing different countries medal counts
+- Comparing USA vs other countries at different athletic advents
 
 ---
 
