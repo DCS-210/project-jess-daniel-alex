@@ -53,7 +53,10 @@ class: center, middle
 
 class: inverse, center, middle
 
-# Section title
+## What sections/topics we decided to anaylze 
+
+- Comparing different countries medal counts
+- Comparing USA vs other countries at different athletic advents
 
 ---
 
