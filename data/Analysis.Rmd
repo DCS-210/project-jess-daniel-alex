@@ -14,6 +14,7 @@ library(readr)
 ```{r upload-data}
 Summer_olympics <- read_csv("Summer-Olympic-medals-1976-to-2008.csv")
 Country_codes <- read_csv("coutry-and-continent-codes.csv")
+gdp_data <- read_csv("gdp_data.csv")
 ```
 
 ```{r augmenting-data}
@@ -142,6 +143,12 @@ Olympic_final %>%
    title = "Total Medal Count for Rowing for the United Kingdom") +
    geom_col() +
    scale_x_continuous(breaks = seq(1996,2008, by = 4), labels = c("1996", "2000", "2004", "2008"))
-
 ```
+
+```{r gdp}
+gdp_data %>%
+   filter(Year == "1998") %>%
+   View
+```
+
 ```
