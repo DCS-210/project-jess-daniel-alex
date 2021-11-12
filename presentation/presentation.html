@@ -38,7 +38,8 @@ class: center, middle
 
 ## Introduction page
 
-- Our original question that we wanted research was "which regions are the best at which sport". After analyzing our pros and cons of our data we decided to re do our research question.We decided to analyze out research in comparing USA to other countries in specific areas of sport and comparing  an country’s GDP to how well they medaled in each four of the olypmics. 
+- Our original question that we wanted research was "which regions are the best at which sport". After analyzing our pros and cons of our data we decided to re do our research question.We decided to analyze out research in comparing USA to other countries in specific areas of sport and comparing  an country’s GDP to how well they medaled in each four of the Olympics. 
+- We created two mutated data sets of our orginal data set to make our analysis of our data easier
 
 ---
 
@@ -51,11 +52,19 @@ class: inverse, center, middle
 
 ---
 
-# Hello World
+## North America graph
 
-- Click the `Knit` button to compile your presentation
+&lt;img src="presentation_files/figure-html/unnamed-chunk-2-1.png" width="100%" /&gt;
 
-- Make sure to commit and push all resulting files to your GitHub repo
+
+
+```r
+##Olympic_final %&gt;%
+ ## filter(Continent_Name == "North America") %&gt;%
+  ##ggplot(aes(x = Country, y = Medal_value, fill = Medal)) +
+ ## geom_col() +
+ ## facet_wrap(~ "Continent_Name")
+```
 
 ---
 
@@ -143,7 +152,7 @@ glance(model)
 - goes here
 ]
 .pull-right[
-&lt;img src="presentation_files/figure-html/unnamed-chunk-2-1.png" width="100%" /&gt;
+&lt;img src="presentation_files/figure-html/unnamed-chunk-3-1.png" width="100%" /&gt;
 ]
 
 ---

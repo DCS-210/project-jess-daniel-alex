@@ -30,9 +30,7 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 ```
 
 ```{r load-data, include=FALSE}
-Summer_olympics <- read_csv("Summer-Olympic-medals-1976-to-2008.csv")
-Country_codes <- read_csv("coutry-and-continent-codes.csv")
-gdp_data <- read_csv("gdp_data.csv")
+
 ```
 
 ```{r}
@@ -62,13 +60,14 @@ class: inverse, center, middle
 
 ## North America graph
 
-```{r NA_graph}
+```{r warning=FALSE, out.width="100%", fig.width=4, echo=FALSE}
 Olympic_final %>%
-  filter(Continent_Name == "North America") %>%
-  ggplot(aes(x = Country, y = Medal_value, fill = Medal)) +
-  geom_col() +
+   filter(Continent_Name == "North America") %>%
+  ggplot(aes(x = Country, y = Medal_value, fill=Medal)) +
+  geom_col()  +
   facet_wrap(~ "Continent_Name")
 ```
+
 
 ---
 
