@@ -8,6 +8,8 @@ output: html_document
 library(tidyverse)
 library(broom)
 library(readr)
+library(tidymodels)
+library(openintro)
 ```
 
 
@@ -157,5 +159,23 @@ Olympic_gdp<-Olympic_final_new %>%
    select(Country, Year, gdp, Medal_value) %>%
    group_by(Country, Year, gdp) %>%
    summarise(Medal_value=n())
+```
+```{r gdp-regression}
+Olympic_gdp_regression <- linear_reg() %>%
+   set_engine("lm") %>%
+   fit(Medal_value~gdp, data = Olympic_gdp)
+
+Olympic_gdp_regression
+
+glance(Olympic_gdp_regression)$r.squared
+ 
+Olympic_gdp %>%
+   ungroup() %>%
+   summarise(
+      Average_gdp = mean(gdp),
+      Median_gdp = median(gdp),
+      Lowest_gdp = min(gdp),
+      Highest_gdp = max(gdp)
+   )
 ```
 
