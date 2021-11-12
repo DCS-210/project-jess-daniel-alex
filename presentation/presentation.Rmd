@@ -53,8 +53,8 @@ class: inverse, center, middle
 
 ## What sections/topics we decided to anaylze 
 
-- Comparing different countries medal counts
-- Comparing USA vs other countries at different athletic advents
+-Our first analysis of the data was analyzing the United States against other countries in different athletic advents. We picked the United States because of the probability that we would get data for all four Olympics in our events. For each section of analyzing the Unite States we analyzed them against certain countries that we believed would do well in those events 
+
 
 ---
 
@@ -68,6 +68,7 @@ Olympic_final %>%
   facet_wrap(~ "Continent_Name")
 ```
 
+Anaylis of data
 
 ---
 
