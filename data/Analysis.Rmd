@@ -146,9 +146,11 @@ Olympic_final %>%
 ```
 
 ```{r gdp}
-gdp_data %>%
-   filter(Year == "1998") %>%
+Olympic_final %>%
+   left_join(gdp_data, by = c("Year" = "Year")) %>%
+   filter(Country_Name.y == "United States") %>%
    View
+# Does not really work right now, working through it tho...
 ```
 
 ```
