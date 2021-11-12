@@ -30,9 +30,9 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 ```
 
 ```{r load-data, include=FALSE}
-library(tidyverse)
-library(broom)
-library(readr)
+Summer_olympics <- read_csv("Summer-Olympic-medals-1976-to-2008.csv")
+Country_codes <- read_csv("coutry-and-continent-codes.csv")
+gdp_data <- read_csv("gdp_data.csv")
 ```
 
 ```{r}
@@ -46,7 +46,8 @@ class: center, middle
 
 ## Introduction page
 
-- Our original question that we wanted research was "which regions are the best at which sport". After analyzing our pros and cons of our data we decided to re do our research question.We decided to analyze out research in comparing USA to other countries in specific areas of sport and comparing  an country’s GDP to how well they medaled in each four of the olypmics. 
+- Our original question that we wanted research was "which regions are the best at which sport". After analyzing our pros and cons of our data we decided to re do our research question.We decided to analyze out research in comparing USA to other countries in specific areas of sport and comparing  an country’s GDP to how well they medaled in each four of the Olympics. 
+- We created two mutated data sets of our orginal data set to make our analysis of our data easier
 
 ---
 
@@ -59,11 +60,15 @@ class: inverse, center, middle
 
 ---
 
-# Hello World
+## North America graph
 
-- Click the `Knit` button to compile your presentation
-
-- Make sure to commit and push all resulting files to your GitHub repo
+```{r NA_graph}
+Olympic_final %>%
+  filter(Continent_Name == "North America") %>%
+  ggplot(aes(x = Country, y = Medal_value, fill = Medal)) +
+  geom_col() +
+  facet_wrap(~ "Continent_Name")
+```
 
 ---
 
