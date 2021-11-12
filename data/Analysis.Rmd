@@ -46,14 +46,16 @@ Olympic_collapse <- Olympic_final %>%
                      "Switzerland", "Slovenia", "Denmark", "Croatia", "Greece",
                      "Portugal", "Serbia", "Latvia") ~ "Europe",
       Country %in% c("Bahamas", "Costa Rica") ~ "North America",
-      Country %in% c("Trinidad and Tobago", "Chile") ~ "South America",
+      Country %in% c("Trinidad and Tobago", "Chile", "Paraguay") ~ "South America",
       Country %in% c("Indonesia", "Taiwan", "Vietnam", "Iran",  "Malaysia",
                      "Mongolia") ~ "Asia",
-      Country %in% c("Zimbabwe", "Nigeria") ~ "Africa",  
+      Country %in% c("Zimbabwe", "Nigeria", "South Africa", "Algeria") ~ "Africa",  
        TRUE    ~ Continent_Name)) %>%
-  count() %>%
+  relocate(Continent_Name, .after = Country) %>%
+   count(Continent_Name = Continent_Name)%>%
   pivot_wider(names_from = Medal, values_from = n) %>%
-  mutate_all(~replace(., is.na(.), 0))
+  mutate_all(~replace(., is.na(.), 0)) %>%
+  relocate(Gold, .after = Silver)
 ```
 
 ```{r NA_graph}
