@@ -147,12 +147,9 @@ Olympic_final %>%
    scale_x_continuous(breaks = seq(1996,2008, by = 4), labels = c("1996", "2000", "2004", "2008"))
 ```
 
-```{r gdp}
-Olympic_final %>%
-   left_join(gdp_data, by = c("Year" = "Year")) %>%
-   filter(Country_Name.y == "United States") %>%
-   View
-# Does not really work right now, working through it tho...
+```{r merging_gdp_with_olympic}
+   Olympic_final_new <- merge(Olympic_final, gdp_data,
+   by=c("Year","Country_Code"))
 ```
 
 ```
