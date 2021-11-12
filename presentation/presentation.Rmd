@@ -37,7 +37,7 @@ library(readr)
 
 ```{r}
 style_xaringan(
-  title_slide_background_image = "img/confetti.jpg"
+  title_slide_background_image = "img/olympic_rings_on_white.jpg"
 )
 ```
 
@@ -46,8 +46,7 @@ class: center, middle
 
 ## Introduction page
 
-- research question 
-- data where we got it
+- Our original question that we wanted research was "which regions are the best at which sport". After analyzing our pros and cons of our data we decided to re do our research question.We decided to analyze out research in comparing USA to other countries in specific areas of sport and comparing  an country’s GDP to how well they medaled in each four of the olypmics. 
 
 ---
 
