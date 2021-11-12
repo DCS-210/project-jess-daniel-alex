@@ -152,4 +152,10 @@ Olympic_final %>%
    by=c("Year","Country_Code"))
 ```
 
+```{r summarise-medals-with-gdp}
+Olympic_gdp<-Olympic_final_new %>%
+   select(Country, Year, gdp, Medal_value) %>%
+   group_by(Country, Year, gdp) %>%
+   summarise(Medal_value=n())
 ```
+
