@@ -83,7 +83,7 @@ Olympic_collapse <- Olympic_final %>%
    count(Continent_Name = Continent_Name)%>%
   pivot_wider(names_from = Medal, values_from = n) %>%
   mutate_all(~replace(., is.na(.), 0)) %>%
-  relocate(Gold, .after = Silver)
+  relocate(Gold, .after = Silver) 
 ```
 
 ```{r, echo=FALSE}
