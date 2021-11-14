@@ -1,5 +1,5 @@
 ---
-title: "Analysis of Olypics Results 1996-1008"
+title: "Analysis of Olypics Results 1996-2008"
 subtitle: "Presentation subtitle (if any)"
 author: "By: Alex, Dan, Jess"
 institute: "DCS 210"
@@ -38,7 +38,7 @@ Summer_Olympic_medals <- read_csv("Summer-Olympic-medals-1976-to-2008.csv")
 
 ```{r}
 style_xaringan(
-  title_slide_background_image = "img/olympic_rings_on_white.jpg"
+  title_slide_background_image = "img/olympic_rings_on_white_206913.jpg"
 )
 ```
 
@@ -64,11 +64,11 @@ class: inverse, center, middle
 ## North America graph
 
 ```{r warning=FALSE, out.width="100%", fig.width=4, echo=FALSE}
-Olympic_final %>%
-   filter(Continent_Name == "North America") %>%
-  ggplot(aes(x = Country, y = Medal_value, fill=Medal)) +
-  geom_col()  +
-  facet_wrap(~ "Continent_Name")
+#Olympic_final %>%
+ #  filter(Continent_Name == "North America") %>%
+ # ggplot(aes(x = Country, y = Medal_value, fill=Medal)) +
+ # geom_col()  +
+ # facet_wrap(~ "Continent_Name")
 ```
 
 Anaylis of data
