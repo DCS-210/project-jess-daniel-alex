@@ -18,6 +18,16 @@ Summer_olympics <- read_csv("Summer-Olympic-medals-1976-to-2008.csv")
 Country_codes <-read_csv("coutry-and-continent-codes.csv")
 gdp_data <- read_csv("gdp_data.csv")
 ```
+```{r homogenizing-data}
+names(gapminder)[1] <- 'Country'
+
+gapminder_summary <-gapminder %>%
+   select(Country, year, pop) %>%
+   filter(year == c(1992, 1997, 2002, 2007)) %>%
+   select(Country, pop) %>%
+   group_by(Country) %>%
+   summarise(pop = mean(pop)) 
+```
 
 ```{r augmenting-data}
 #names(Country_codes)[names(Country_codes) == 'Three_Letter_Country_Code'] <- 'Country_code'
@@ -32,10 +42,17 @@ Olympic_final <- Summer_olympics %>%
       Medal == "Bronze" ~ 1)) %>%
    filter(Year == c(1996, 2000, 2004, 2008)) %>%
    left_join(
-      gapminder,
-      by = c("Country" = "country")
-   )
+      gapminder_summary,
+      by= c("Country")
+   ) %>%
+   mutate(pop = case_when(
+      Country_Name == "Russian Federation" ~ 144000000,
+      Country_Name == "Korea, Republic of" ~ 48000000,
+      Country_Name == "Ukraine" ~ 47500000,
+      Country_Name == "Khazakstan, Republic of" ~ 15000000,
+      TRUE ~ pop))
 ```
+
 
 ```{r summarising-medals}
 #Creating Bronze, Silver, and Gold columns and removing excess
@@ -160,14 +177,14 @@ Olympic_final %>%
 
 ```{r summarise-medals-with-gdp}
 Olympic_gdp<-Olympic_final_new %>%
-   select(Country, Year, gdp, Medal_value) %>%
-   group_by(Country, Year, gdp) %>%
+   select(Country, Year, gdp, Medal_value, pop) %>%
+   group_by(Country, Year, gdp, pop) %>%
    summarise(Medal_value=n())
 ```
 ```{r gdp-regression}
 Olympic_gdp_regression <- linear_reg() %>%
    set_engine("lm") %>%
-   fit(Medal_value~gdp, data = Olympic_gdp)
+   fit(Medal_value~gdp+pop, data = Olympic_gdp)
 
 Olympic_gdp_regression
 
