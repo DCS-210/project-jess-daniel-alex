@@ -23,6 +23,10 @@ library(palmerpenguins)
 library(knitr)
 library(xaringanthemer)
 library(readr)
+library(broom)
+library(openintro)
+#devtools::install_github("jennybc/gapminder")
+library(gapminder)
 ```
 
 ```{r setup, include=FALSE}
@@ -31,12 +35,58 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 ```
 
 ```{r load-data, include=FALSE}
-coutry_continent_codes <- read_csv("coutry-and-continent-codes.csv")
+Summer_olympics <- read_csv("Summer-Olympic-medals-1976-to-2008.csv")
+Country_codes <-read_csv("coutry-and-continent-codes.csv")
 gdp_data <- read_csv("gdp_data.csv")
-Summer_Olympic_medals <- read_csv("Summer-Olympic-medals-1976-to-2008.csv")
 ```
 
-```{r}
+
+```{r augmenting-data, echo=FALSE}
+#names(Country_codes)[names(Country_codes) == 'Three_Letter_Country_Code'] <- 'Country_code'
+Olympic_final <- Summer_olympics %>%
+   left_join(
+      Country_codes, 
+      by = c("Country_Code" = "Three_Letter_Country_Code") ) %>%
+   mutate(
+      Medal_value = case_when(
+      Medal == "Gold" ~ 3,
+      Medal == "Silver" ~ 2,
+      Medal == "Bronze" ~ 1)) %>%
+   filter(Year == c(1996, 2000, 2004, 2008)) %>%
+   left_join(
+      gapminder,
+      by = c("Country" = "country")
+   )
+```
+
+```{r summarising-medals, echo=FALSE}
+#Creating Bronze, Silver, and Gold columns and removing excess
+Olympic_collapse <- Olympic_final %>%
+  group_by(Country) %>%
+  mutate(
+  Bronze = sum(str_count(Medal, "Bronze")),
+  Silver = sum(str_count(Medal, "Silver")),
+  Gold = sum(str_count(Medal, "Gold"))) %>%
+  select(Country, Medal, Continent_Name) %>%
+  group_by(Country, Medal) %>%
+  mutate(Continent_Name = case_when(
+      Country %in% c("Germany", "Netherlands", "Yugoslavia", "Bulgaria",
+                     "Switzerland", "Slovenia", "Denmark", "Croatia", "Greece",
+                     "Portugal", "Serbia", "Latvia") ~ "Europe",
+      Country %in% c("Bahamas", "Costa Rica") ~ "North America",
+      Country %in% c("Trinidad and Tobago", "Chile", "Paraguay") ~ "South America",
+      Country %in% c("Indonesia", "Taiwan", "Vietnam", "Iran",  "Malaysia",
+                     "Mongolia") ~ "Asia",
+      Country %in% c("Zimbabwe", "Nigeria", "South Africa", "Algeria") ~ "Africa",  
+       TRUE    ~ Continent_Name)) %>%
+  relocate(Continent_Name, .after = Country) %>%
+   count(Continent_Name = Continent_Name)%>%
+  pivot_wider(names_from = Medal, values_from = n) %>%
+  mutate_all(~replace(., is.na(.), 0)) %>%
+  relocate(Gold, .after = Silver)
+```
+
+```{r, echo=FALSE}
 style_xaringan(
   title_slide_background_image = "img/olympic_rings_on_white_206913.jpg"
 )
@@ -63,21 +113,32 @@ class: inverse, center, middle
 
 ## North America graph
 
-```{r warning=FALSE, out.width="100%", fig.width=4, echo=FALSE}
-#Olympic_final %>%
- #  filter(Continent_Name == "North America") %>%
- # ggplot(aes(x = Country, y = Medal_value, fill=Medal)) +
- # geom_col()  +
- # facet_wrap(~ "Continent_Name")
+.pull-right[
+- Some text
+- goes here
+]
+.pull-left[
+```{r NA, echo=FALSE, fig.width=8, warning=FALSE, out.width="100%"}
+Olympic_final %>%
+   filter(Sport == "Athletics") %>%
+   filter(Country == "United States") %>%
+   ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
+   labs(x = "Year", y = "Total Medal Values", 
+   title = "Total Medal Count for Athletics for the United States") +
+   geom_col() +
+   scale_x_continuous(breaks = seq(1996,2008, by = 4), labels = c("1996", "2000", "2004", "2008"))
 ```
-
-Anaylis of data
+]
 
 ---
 
 class: inverse, middle, center
 
-# Using xaringan
+## Russia vs North America graph 
+
+graph 
+
+analysis 
 
 ---
 
@@ -117,9 +178,9 @@ or text in two columns $^*$
 
 ```{r boring-regression}
 # a boring regression
-model <- lm(dist ~ speed, data = cars)
-tidy(model)
-glance(model)
+#model <- lm(dist ~ speed, data = cars)
+#tidy(model)
+#glance(model)
 ```
 
 ---
@@ -127,18 +188,22 @@ glance(model)
 # Plots
 
 ```{r recode-species, echo = FALSE}
-# In this chunk I'm doing a bunch of analysis that I don't want to present 
-# in my slides. But I need the resulting data frame for a plot I want to present.
+
+# In this chunk I'm doing a bunch of analysis that I don't want to present in my slides. But I need the resulting data frame for a plot I want to present.
+
 iris_modified <- iris %>%
   mutate(Species = fct_other(Species, keep = "setosa"))
 ```
 
 ```{r plot-iris, echo = FALSE}
-# Code hidden with echo = FALSE
-# Uses modified iris dataset from previous chunk
-# Play around with height and width until you're happy with the look
+#Code hidden with echo = FALSE
+ #Uses modified iris dataset from previous chunk
+#Play around with height and width until you're happy with the look
+
+
+
 ggplot(data = iris_modified, mapping = aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
-  geom_point() + 
+ geom_point() + 
   theme_minimal() # theme options: https://ggplot2.tidyverse.org/reference/ggtheme.html
 ```
 
@@ -154,23 +219,14 @@ ggplot(data = iris_modified, mapping = aes(x = Sepal.Width, y = Sepal.Length, co
 ```{r warning=FALSE, out.width="100%", fig.width=4, echo=FALSE}
 # see how I changed out.width and fig.width from defaults
 # to make the figure bigger
-ggplot(penguins, aes(x = bill_length_mm, y = species, color = species)) +
-  geom_boxplot() +
-  theme_minimal()
+#ggplot(penguins, aes(x = bill_length_mm, y = species, color = species)) +
+#  geom_boxplot() +
+ # theme_minimal()
 ```
 ]
 
 ---
 
-# Tables
-
-If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
-
-```{r iris-table, echo = FALSE}
-kable(head(iris), format = "html")
-```
-
----
 
 # Images
 

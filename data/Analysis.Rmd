@@ -10,6 +10,8 @@ library(broom)
 library(readr)
 library(tidymodels)
 library(openintro)
+#devtools::install_github("jennybc/gapminder")
+library(gapminder)
 ```
 
 
