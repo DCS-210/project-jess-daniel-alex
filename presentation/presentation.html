@@ -28,51 +28,7 @@ class: center, middle, inverse, title-slide
 
 
 
-```r
-#names(Country_codes)[names(Country_codes) == 'Three_Letter_Country_Code'] &lt;- 'Country_code'
-Olympic_final &lt;- Summer_olympics %&gt;%
-   left_join(
-      Country_codes, 
-      by = c("Country_Code" = "Three_Letter_Country_Code") ) %&gt;%
-   mutate(
-      Medal_value = case_when(
-      Medal == "Gold" ~ 3,
-      Medal == "Silver" ~ 2,
-      Medal == "Bronze" ~ 1)) %&gt;%
-   filter(Year == c(1996, 2000, 2004, 2008)) %&gt;%
-   left_join(
-      gapminder,
-      by = c("Country" = "country")
-   )
-```
 
-
-```r
-#Creating Bronze, Silver, and Gold columns and removing excess
-Olympic_collapse &lt;- Olympic_final %&gt;%
-  group_by(Country) %&gt;%
-  mutate(
-  Bronze = sum(str_count(Medal, "Bronze")),
-  Silver = sum(str_count(Medal, "Silver")),
-  Gold = sum(str_count(Medal, "Gold"))) %&gt;%
-  select(Country, Medal, Continent_Name) %&gt;%
-  group_by(Country, Medal) %&gt;%
-  mutate(Continent_Name = case_when(
-      Country %in% c("Germany", "Netherlands", "Yugoslavia", "Bulgaria",
-                     "Switzerland", "Slovenia", "Denmark", "Croatia", "Greece",
-                     "Portugal", "Serbia", "Latvia") ~ "Europe",
-      Country %in% c("Bahamas", "Costa Rica") ~ "North America",
-      Country %in% c("Trinidad and Tobago", "Chile", "Paraguay") ~ "South America",
-      Country %in% c("Indonesia", "Taiwan", "Vietnam", "Iran",  "Malaysia",
-                     "Mongolia") ~ "Asia",
-      Country %in% c("Zimbabwe", "Nigeria", "South Africa", "Algeria") ~ "Africa",  
-       TRUE    ~ Continent_Name)) %&gt;%
-  relocate(Continent_Name, .after = Country) %&gt;%
-   count(Continent_Name = Continent_Name)%&gt;%
-  pivot_wider(names_from = Medal, values_from = n) %&gt;%
-  mutate_all(~replace(., is.na(.), 0)) %&gt;%
-  relocate(Gold, .after = Silver)
-```
 
 ```
 ## `mutate_all()` ignored the following grouping variables:
@@ -81,14 +37,9 @@ Olympic_collapse &lt;- Olympic_final %&gt;%
 ```
 
 
-```r
-style_xaringan(
-  title_slide_background_image = "img/olympic_rings_on_white_206913.jpg"
-)
-```
 
 
-class: center, middle
+##class: center, middle
 
 ## Introduction page
 
@@ -108,13 +59,13 @@ class: inverse, center, middle
 
 ## North America graph
 
-.pull-left[
+.pull-right[
 - Some text
 - goes here
 ]
-.pull-right[
-&lt;img src="presentation_files/figure-html/NA-1.png" width="80%" /&gt;
-analysis of data
+.pull-left[
+&lt;img src="presentation_files/figure-html/NA-1.png" width="100%" /&gt;
+]
 
 ---
 

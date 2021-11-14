@@ -41,7 +41,7 @@ gdp_data <- read_csv("gdp_data.csv")
 ```
 
 
-```{r augmenting-data}
+```{r augmenting-data, echo=FALSE}
 #names(Country_codes)[names(Country_codes) == 'Three_Letter_Country_Code'] <- 'Country_code'
 Olympic_final <- Summer_olympics %>%
    left_join(
@@ -59,7 +59,7 @@ Olympic_final <- Summer_olympics %>%
    )
 ```
 
-```{r summarising-medals}
+```{r summarising-medals, echo=FALSE}
 #Creating Bronze, Silver, and Gold columns and removing excess
 Olympic_collapse <- Olympic_final %>%
   group_by(Country) %>%
@@ -86,7 +86,7 @@ Olympic_collapse <- Olympic_final %>%
   relocate(Gold, .after = Silver)
 ```
 
-```{r}
+```{r, echo=FALSE}
 style_xaringan(
   title_slide_background_image = "img/olympic_rings_on_white_206913.jpg"
 )
@@ -113,12 +113,12 @@ class: inverse, center, middle
 
 ## North America graph
 
-.pull-left[
+.pull-right[
 - Some text
 - goes here
 ]
-.pull-right[
-```{r NA, echo = FALSE}
+.pull-left[
+```{r NA, echo=FALSE, fig.width=8, warning=FALSE, out.width="100%"}
 Olympic_final %>%
    filter(Sport == "Athletics") %>%
    filter(Country == "United States") %>%
@@ -128,7 +128,7 @@ Olympic_final %>%
    geom_col() +
    scale_x_continuous(breaks = seq(1996,2008, by = 4), labels = c("1996", "2000", "2004", "2008"))
 ```
-analysis of data
+]
 
 ---
 
