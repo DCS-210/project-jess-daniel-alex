@@ -15,7 +15,7 @@ library(openintro)
 
 ```{r upload-data}
 Summer_olympics <- read_csv("Summer-Olympic-medals-1976-to-2008.csv")
-Country_codes <- read_csv("coutry-and-continent-codes.csv")
+Country_codes <-read_csv("coutry-and-continent-codes.csv")
 gdp_data <- read_csv("gdp_data.csv")
 ```
 
@@ -30,7 +30,11 @@ Olympic_final <- Summer_olympics %>%
       Medal == "Gold" ~ 3,
       Medal == "Silver" ~ 2,
       Medal == "Bronze" ~ 1)) %>%
-   filter(Year == c(1996, 2000, 2004, 2008))
+   filter(Year == c(1996, 2000, 2004, 2008)) %>%
+   left_join(
+      gapminder,
+      by = c("Country" = "country")
+   )
 ```
 
 ```{r summarising-medals}
