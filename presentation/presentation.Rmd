@@ -35,9 +35,9 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 ```
 
 ```{r load-data, include=FALSE}
-coutry_continent_codes <- read_csv("coutry-and-continent-codes.csv")
+Summer_olympics <- read_csv("Summer-Olympic-medals-1976-to-2008.csv")
+Country_codes <-read_csv("coutry-and-continent-codes.csv")
 gdp_data <- read_csv("gdp_data.csv")
-Summer_Olympic_medals <- read_csv("Summer-Olympic-medals-1976-to-2008.csv")
 ```
 
 
@@ -113,6 +113,11 @@ class: inverse, center, middle
 
 ## North America graph
 
+.pull-left[
+- Some text
+- goes here
+]
+.pull-right[
 ```{r NA, echo = FALSE}
 Olympic_final %>%
    filter(Sport == "Athletics") %>%
@@ -183,19 +188,23 @@ or text in two columns $^*$
 # Plots
 
 ```{r recode-species, echo = FALSE}
-# In this chunk I'm doing a bunch of analysis that I don't want to present 
-# in my slides. But I need the resulting data frame for a plot I want to present.
-#iris_modified <- iris %>%
- # mutate(Species = fct_other(Species, keep = "setosa"))
+
+# In this chunk I'm doing a bunch of analysis that I don't want to present in my slides. But I need the resulting data frame for a plot I want to present.
+
+iris_modified <- iris %>%
+  mutate(Species = fct_other(Species, keep = "setosa"))
 ```
 
 ```{r plot-iris, echo = FALSE}
-# Code hidden with echo = FALSE
-# Uses modified iris dataset from previous chunk
-# Play around with height and width until you're happy with the look
-#ggplot(data = iris_modified, mapping = aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
- # geom_point() + 
-  #theme_minimal() # theme options: https://ggplot2.tidyverse.org/reference/ggtheme.html
+#Code hidden with echo = FALSE
+ #Uses modified iris dataset from previous chunk
+#Play around with height and width until you're happy with the look
+
+
+
+ggplot(data = iris_modified, mapping = aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
+ geom_point() + 
+  theme_minimal() # theme options: https://ggplot2.tidyverse.org/reference/ggtheme.html
 ```
 
 ---
