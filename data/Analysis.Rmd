@@ -220,12 +220,16 @@ Olympic_pop_regression
 glance(Olympic_pop_regression)$r.squared
  
 Olympic_gdp %>%
+   group_by(Country) %>%
+   mutate(
+      pop = mean(pop)
+   ) %>%
    ungroup() %>%
    summarise(
-      Average_pop = mean(pop),
-      Median_pop = median(pop),
-      Lowest_pop = min(pop),
-      Highest_pop = max(pop)
+      Average_pop = mean(pop, na.rm=TRUE),
+      Median_pop = median(pop, na.rm=TRUE),
+      Lowest_pop = min(pop, na.rm=TRUE),
+      Highest_pop = max(pop, na.rm=TRUE)
    )
 ```
 ```{r regression-pop}
