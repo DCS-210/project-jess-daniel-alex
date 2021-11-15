@@ -183,10 +183,11 @@ Olympic_gdp<-Olympic_final_new %>%
    group_by(Country, Year, gdp, pop) %>%
    summarise(Medal_value=n())
 ```
+
 ```{r gdp-regression}
 Olympic_gdp_regression <- linear_reg() %>%
    set_engine("lm") %>%
-   fit(Medal_value~gdp+pop, data = Olympic_gdp)
+   fit(Medal_value~gdp, data = Olympic_gdp)
 
 Olympic_gdp_regression
 
@@ -201,4 +202,49 @@ Olympic_gdp %>%
       Highest_gdp = max(gdp)
    )
 ```
+```{r regression-gdp}
+Olympic_gdp %>%
+ggplot(mapping = aes(x = gdp, y = Medal_value)) +
+  geom_point(alpha = 0.5)+
+  geom_jitter() +
+   geom_smooth(method = "lm", se = FALSE, size = 1)
+```
+
+```{r pop-regression}
+Olympic_pop_regression <- linear_reg() %>%
+   set_engine("lm") %>%
+   fit(Medal_value~pop, data = Olympic_gdp)
+
+Olympic_pop_regression
+
+glance(Olympic_pop_regression)$r.squared
+ 
+Olympic_gdp %>%
+   ungroup() %>%
+   summarise(
+      Average_pop = mean(pop),
+      Median_pop = median(pop),
+      Lowest_pop = min(pop),
+      Highest_pop = max(pop)
+   )
+```
+```{r regression-pop}
+Olympic_gdp %>%
+   filter(pop <= 80000000) %>%
+ggplot(mapping = aes(x = pop, y = Medal_value)) +
+  geom_point(alpha = 0.5)+
+  geom_jitter(width=1000000) +
+   geom_smooth(method = "lm", se = FALSE, size = 1)
+```
+
+```{r regression-both}
+Regression_both <- linear_reg() %>%
+   set_engine("lm") %>%
+   fit(Medal_value~pop+gdp, data = Olympic_gdp)
+
+glance(Regression_both)$r.squared
+```
+
+
+
 
