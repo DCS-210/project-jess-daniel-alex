@@ -86,6 +86,20 @@ Olympic_collapse <- Olympic_final %>%
   relocate(Gold, .after = Silver) 
 ```
 
+
+```{r merging_gdp_with_olympic}
+   Olympic_final_new <- merge(Olympic_final, gdp_data,
+   by=c("Year","Country_Code"))
+```
+
+```{r summarise-medals-with-gdp}
+Olympic_gdp<-Olympic_final_new %>%
+   select(Country, Year, gdp, Medal_value, pop) %>%
+   group_by(Country, Year, gdp, pop) %>%
+   summarise(Medal_value=n())
+```
+
+
 ```{r, echo=FALSE}
 style_xaringan(
   title_slide_background_image = "img/olympic_rings_on_white_206913.jpg"
@@ -155,6 +169,28 @@ Olympic_final %>%
  
 
 ---
+
+## GDP Regression Plot
+
+```{r gdp-regression, echo=FALSE, fig.width=8, warning=FALSE, out.width="100%"}
+Olympic_gdp_regression <- linear_reg() %>%
+   set_engine("lm") %>%
+   fit(Medal_value~gdp, data = Olympic_gdp)
+
+Olympic_gdp_regression
+
+glance(Olympic_gdp_regression)$r.squared
+ 
+Olympic_gdp %>%
+   ungroup() %>%
+   summarise(
+      Average_gdp = mean(gdp),
+      Median_gdp = median(gdp),
+      Lowest_gdp = min(gdp),
+      Highest_gdp = max(gdp)
+   )
+```
+
 
 # xaringan
 

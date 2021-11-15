@@ -93,10 +93,10 @@ Olympic_final %>%
 
 ```{r Russia_US_graph_Total_Medals}
 Olympic_final %>%
-   filter(Country == c("United States", "Russia")) %>%
+   filter(Country == c("United States", "Cuba")) %>%
    ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
    labs(x = "Year", y = "Total Medal Values", 
-   title = "Total Medal Value for USA and Russia") +
+   title = "Total Medal Value for USA and Cuba") +
    geom_col() +
    facet_wrap(~ Country) +
    scale_x_continuous(breaks = seq(1996,2008, by = 4), labels = c("1996", "2000", "2004", "2008"))
