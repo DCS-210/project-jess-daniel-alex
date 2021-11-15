@@ -98,7 +98,8 @@ Olympic_final %>%
    labs(x = "Year", y = "Total Medal Values", 
    title = "Total Medal Value for USA and Russia") +
    geom_col() +
-   facet_wrap(~ Country)
+   facet_wrap(~ Country) +
+   scale_x_continuous(breaks = seq(1996,2008, by = 4), labels = c("1996", "2000", "2004", "2008"))
 ```
 
 ```{r US_aquatics}
