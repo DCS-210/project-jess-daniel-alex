@@ -125,14 +125,19 @@ class: inverse, center, middle
 
 ---
 
+class: inverse, middle, center
+
 ## North America graph
 
-.pull-right[
-- Some text
-- goes here
-]
-.pull-left[
-```{r NA, echo=FALSE, fig.width=8, warning=FALSE, out.width="100%"}
+.pull-right {
+  float: right;
+  width: 50%;
+}
+
+.pull-left {
+  float: left;
+  width: 50%;
+```{r NA, echo=FALSE}
 Olympic_final %>%
    filter(Sport == "Athletics") %>%
    filter(Country == "United States") %>%
@@ -142,11 +147,7 @@ Olympic_final %>%
    geom_col() +
    scale_x_continuous(breaks = seq(1996,2008, by = 4), labels = c("1996", "2000", "2004", "2008"))
 ```
-]
-
----
-
-
+}
 
 ---
 
@@ -174,8 +175,15 @@ Olympic_final %>%
 
 ---
 
+class: inverse, middle, center
+
 ## GDP Regression Plot
 
+.pull-right[
+- Some text
+- goes here
+]
+.pull-left[
 ```{r gdp-regression, echo=FALSE, fig.width=8, warning=FALSE, out.width="100%"}
 Olympic_gdp_regression <- linear_reg() %>%
    set_engine("lm") %>%
@@ -194,7 +202,9 @@ Olympic_gdp %>%
       Highest_gdp = max(gdp)
    )
 ```
+]
 
+---
 
 # xaringan
 
