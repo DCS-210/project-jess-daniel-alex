@@ -146,6 +146,10 @@ Olympic_final %>%
 
 ---
 
+
+
+---
+
 class: inverse, middle, center
 
 ## Cuba vs North America graph 
