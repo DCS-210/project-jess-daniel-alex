@@ -184,7 +184,7 @@ class: inverse, middle, center
 - goes here
 ]
 .pull-left[
-```{r gdp-regression, echo=FALSE, fig.width=8, warning=FALSE, out.width="100%"}
+```{r gdp-regression, echo=FALSE}
 Olympic_gdp_regression <- linear_reg() %>%
    set_engine("lm") %>%
    fit(Medal_value~gdp, data = Olympic_gdp)
