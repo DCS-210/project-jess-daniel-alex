@@ -216,6 +216,9 @@ Olympic_gdp %>%
   labs(title = "Regressing Population on Medal Value", y = "Total Medal Value", x = "Population")
 ```
 
+---
+
+
 # xaringan
 
 - The presentation is created using the `xaringan` package
