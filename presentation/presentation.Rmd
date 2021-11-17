@@ -132,25 +132,14 @@ class: inverse, middle, center
 
 ## North America graph
 
-.pull-right {
-  float: right;
-  width: 50%;
-}
-
-.pull-left {
-  float: left;
-  width: 50%;
-```{r NA, echo=FALSE}
+```{r NA_graph, echo=FALSE}
 Olympic_final %>%
-   filter(Sport == "Athletics") %>%
-   filter(Country == "United States") %>%
-   ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
-   labs(x = "Year", y = "Total Medal Values", 
-   title = "Total Medal Count for Athletics for the United States") +
-   geom_col() +
-   scale_x_continuous(breaks = seq(1996,2008, by = 4), labels = c("1996", "2000", "2004", "2008"))
+   filter(Continent_Name == "North America") %>%
+  ggplot(aes(x = Country, y = Medal_value, fill = Medal)) +
+  geom_col()  +
+  facet_wrap(~ "Continent_Name") +
+  labs(title = "Top Medal Count in North America")
 ```
-}
 
 ---
 
