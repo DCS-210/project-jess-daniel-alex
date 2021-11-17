@@ -113,9 +113,9 @@ style_xaringan(
 
 ## Introduction
 
-Our original question that we wanted research was "which regions are the best at which sport". After analyzing our pros and cons of our data we decided to re do our research question.We decided to analyze out research in comparing USA to other countries in specific areas of sport and comparing  an country’s GDP to how well they medaled in each four of the Olympics. 
+Our original question that we wanted research was "which regions are the best at which sport". After analyzing our pros and cons of our data we decided to re do what we wanted to research. We decided to analyze our research in comparing USA to other countries the medal count and comparing  an country’s GDP to how well they medaled in each four of the Olympics. 
 
-We created two mutated data sets of our orginal data set to make our analysis of our data easier
+We created four mutated data sets of our orginal data set to make our analysis of our data easier.
 
 ---
 
@@ -123,7 +123,7 @@ class: inverse, center, middle
 
 ## What sections/topics we decided to anaylze 
 
-Our first analysis of the data was analyzing the United States against other countries in different athletic events. We picked the United States because of the probability that we would get data for all four Olympics in our events. For each section of analyzing the United States we analyzed them against certain countries that we believed would do well in those events. In addition, we ended up regressing both GDP and Population on the medal count to see if our original hypothesis was correct.
+Our first analysis of the data was analyzing the United States against other countries in the overall amount of medals won throughout the four Olympics. We picked the United States because of the probability that we would get data for all four Olympics. In addition, we ended up regressing both GDP and Population on the medal count to see if our original hypothesis was correct.
 
 ---
 
