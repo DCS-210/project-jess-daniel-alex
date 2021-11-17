@@ -108,9 +108,8 @@ style_xaringan(
 )
 ```
 
----
 
-class: inverse, center, middle
+
 
 ## Introduction page
 
