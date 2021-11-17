@@ -108,7 +108,7 @@ Olympic_final %>%
    filter(Continent_Name == "North America") %>%
   ggplot(aes(x = Country, y = Medal_value, fill = Medal)) +
   geom_col()  +
-  facet_wrap(~ "Continent_Name")
+  labs(facet_wrap="Test")
 ```
 
 ```{r Cuba_US_graph_Total_Medals}

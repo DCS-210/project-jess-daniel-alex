@@ -137,8 +137,8 @@ Olympic_final %>%
   ggplot(aes(x = Country, y = Medal_value, fill = Medal)) +
   geom_col()  +
   labs(y = "Total Medal Value") +
-  facet_wrap(~ "Continent_Name") +
-  labs(title = "Medal Count in North America")
+  labs(title = "Medal Count in North America") +
+   theme(axis.text.x = element_text(angle = 10))
 ```
 
 ---
@@ -151,10 +151,9 @@ class: inverse, middle, center
 Olympic_final %>%
    filter(Country == c("United States", "Cuba")) %>%
    ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
-   labs(x = "Year", y = "Total Medal Value", 
-   title = "Total Medal Count for USA and Cuba") +
+   labs(x = "Year", y = "Total Medal Value", title = "Total Medal Count for USA and Cuba") +
    geom_col() +
-   facet_wrap(~ Country) +
+   facet_wrap(~Country) +
    scale_x_continuous(breaks = seq(1996,2008, by = 4), labels = c("1996", "2000", "2004", "2008"))
 ```
  
