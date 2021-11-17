@@ -1,6 +1,6 @@
 ---
 theme: jekyll-theme-minimal
-title: "Analysis of Olypics Results 1996-2008"
+title: "Analysis of Olympics Results 1996-2008"
 subtitle: "Do GDP and Population have an impact on Countries success at the Olympics?"
 author: "By: Alex, Dan, Jess"
 institute: "DCS 210"
