@@ -109,6 +109,11 @@ style_xaringan(
 ```
 
 
+<<<<<<< HEAD
+class: inverse, center, middle
+--- 
+=======
+>>>>>>> 62f7ec7544add0817afb6cd2501bfee48efa5a91
 
 ## Introduction page
 

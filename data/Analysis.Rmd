@@ -82,16 +82,24 @@ Olympic_collapse <- Olympic_final %>%
   mutate_all(~replace(., is.na(.), 0)) %>%
   relocate(Gold, .after = Silver)
 ```
+
 ```{r Overall-graph}
 Olympic_overall <- Olympic_collapse %>% 
    group_by(Country) %>%
-   mutate(Medal_sum = Bronze + Silver + Gold )
+   mutate(Medal_sum = Bronze + Silver + Gold ) %>%
+   arrange(desc(Medal_sum))
 
-Olympic_overall %>%
-   filter(Medal_sum>60) %>%
-   fct_reorder(Country, Medal_sum, desc=TRUE) %>%
-   ggplot(aes(x=Country, y=Medal_sum)) +
-   geom_col()
+Olympic_overall_tograph <- pivot_longer(Olympic_overall, cols= c("Bronze", "Silver", "Gold"), names_to="variable", values_to="value") %>%
+  group_by(Country) %>%
+  mutate(proportion=value/Medal_sum)
+
+Olympic_overall_tograph %>%
+  filter(Medal_sum>60) %>%
+  mutate(Country_name = factor(Country, levels=c("Russia", "United States", "Australia", "Germany", "China", "Netherlands", "Cuba", "Brazil"))) %>%
+  ggplot(aes(x=Country_name, y=value, fill = variable)) +
+  labs(title = "Winningest Countries in the World", x = "Country", y = "Total Medal Count", fill = "Medal Type") +
+  geom_col() +
+  theme(axis.text.x = element_text(angle = 45))
 ```
 
 
