@@ -22,7 +22,7 @@ Our findings, to be fair, very much surprised us and were not what we were expec
 
 ## Presentation
 
-Our presentation can be found [here](https://6191d4a8240f49b7acbeea6236bd3bc1.app.rstudio.cloud/file_show?path=%2Fcloud%2Fproject%2Fpresentation%2Fpresentation.html#1).
+Our presentation can be found [here](presentation/presentation.html).
 
 ## Data
 
