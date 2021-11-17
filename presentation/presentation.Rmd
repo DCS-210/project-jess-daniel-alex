@@ -126,7 +126,6 @@ class: inverse, center, middle
 
 Our first analysis of the data was analyzing the United States against other countries in different athletic advents. We picked the United States because of the probability that we would get data for all four Olympics in our events. For each section of analyzing the Unite States we analyzed them against certain countries that we believed would do well in those events 
 
-
 ---
 
 class: inverse, middle, center
@@ -208,7 +207,7 @@ class: inverse, middle, center
 
 ## Regressing Population on Medal Value 
 
-```{r pop_stats, echo = FALSE, out.height= 200,out.width=1000, fig.align = "center"}
+```{r reg_pop, echo = FALSE, out.height= 520,out.width=1000, fig.align = "center"}
 knitr::include_graphics("img/reg_pop_medal_value.jpg")
 
 
@@ -241,5 +240,22 @@ Olympic_overall_tograph %>%
 ```
 
 ---
+
+class: inverse, middle, center
+
+## Limitations of our Dataset 
+
+```{r lims_of_data, echo = FALSE, out.height= 450,out.width=900, fig.align = "center"}
+knitr::include_graphics("img/confused1.png")
+
+```
+
+---
+
+class: inverse, middle, center
+
+## Conclusion
+
+Overall, 
 
 
