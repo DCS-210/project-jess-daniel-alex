@@ -1,4 +1,5 @@
 ---
+theme: jekyll-theme-minimal
 title: "Analysis of Olypics Results 1996-2008"
 subtitle: "Presentation subtitle (if any)"
 author: "By: Alex, Dan, Jess"
@@ -29,12 +30,12 @@ library(openintro)
 library(gapminder)
 ```
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, echo=FALSE}
 # For better figure resolution
 knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618, out.width = "80%")
 ```
 
-```{r load-data, include=FALSE}
+```{r load-data, include=FALSE, echo=FALSE}
 Summer_olympics <- read_csv("Summer-Olympic-medals-1976-to-2008.csv")
 Country_codes <-read_csv("coutry-and-continent-codes.csv")
 gdp_data <- read_csv("gdp_data.csv")
@@ -59,7 +60,7 @@ Olympic_final <- Summer_olympics %>%
    )
 ```
 
-```{r summarising-medals, echo=FALSE}
+```{r summarising-medals, echo=FALSE, message=FALSE, warning=FALSE}
 #Creating Bronze, Silver, and Gold columns and removing excess
 Olympic_collapse <- Olympic_final %>%
   group_by(Country) %>%
@@ -86,6 +87,7 @@ Olympic_collapse <- Olympic_final %>%
   relocate(Gold, .after = Silver) 
 ```
 
+class: inverse, center, middle
 
 ```{r merging_gdp_with_olympic}
    Olympic_final_new <- merge(Olympic_final, gdp_data,
@@ -106,8 +108,8 @@ style_xaringan(
 )
 ```
 
-
-class: center, middle
+class: inverse, center, middle
+--- 
 
 ## Introduction page
 

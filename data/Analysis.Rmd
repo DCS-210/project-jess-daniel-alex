@@ -82,6 +82,18 @@ Olympic_collapse <- Olympic_final %>%
   mutate_all(~replace(., is.na(.), 0)) %>%
   relocate(Gold, .after = Silver)
 ```
+```{r Overall-graph}
+Olympic_overall <- Olympic_collapse %>% 
+   group_by(Country) %>%
+   mutate(Medal_sum = Bronze + Silver + Gold )
+
+Olympic_overall %>%
+   filter(Medal_sum>60) %>%
+   fct_reorder(Country, Medal_sum, desc=TRUE) %>%
+   ggplot(aes(x=Country, y=Medal_sum)) +
+   geom_col()
+```
+
 
 ```{r NA_graph}
 Olympic_final %>%
