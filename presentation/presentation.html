@@ -34,22 +34,9 @@ class: center, middle, inverse, title-slide
 class: inverse, center, middle
 
 
-```r
-   Olympic_final_new &lt;- merge(Olympic_final, gdp_data,
-   by=c("Year","Country_Code"))
-```
 
 
-```r
-Olympic_gdp&lt;-Olympic_final_new %&gt;%
-   select(Country, Year, gdp, Medal_value, pop) %&gt;%
-   group_by(Country, Year, gdp, pop) %&gt;%
-   summarise(Medal_value=n())
-```
 
-```
-## `summarise()` has grouped output by 'Country', 'Year', 'gdp'. You can override using the `.groups` argument.
-```
 
 
 
@@ -59,9 +46,6 @@ body {
   color: red;
 }
 &lt;/style&gt;
-
-class: inverse, center, middle
---- 
 
 ## Introduction page
 
@@ -84,44 +68,38 @@ class: inverse, middle, center
 
 ## North America graph
 
-.pull-right {
-  float: right;
-  width: 50%;
-}
-
-.pull-left {
-  float: left;
-  width: 50%;
-&lt;img src="presentation_files/figure-html/NA-1.png" width="80%" /&gt;
-}
+&lt;img src="presentation_files/figure-html/NA_graph-1.png" width="80%" /&gt;
 
 ---
 
 class: inverse, middle, center
 
-## Cuba vs North America graph 
+## Cuba vs North America Medal Count
 
-.pull-right[
-- Some text
-- goes here
-]
-.pull-left[
-&lt;img src="presentation_files/figure-html/Cuba_US_graph_Total_Medals-1.png" width="100%" /&gt;
-]
+&lt;img src="presentation_files/figure-html/Cuba_US_graph_Total_Medals-1.png" width="75%" /&gt;
  
 
 ---
 
+<<<<<<< HEAD
+=======
 class: inverse, middle, center
 
-## GDP Regression Plot
+## GDP Regression Statistics 
 
-.pull-right[
-- Some text
-- goes here
-]
-.pull-left[
+&lt;img src="img/GDP_stats.jpg" width="1000" height="200" style="display: block; margin: auto;" /&gt;
 
+
+---
+
+>>>>>>> 62f7ec7544add0817afb6cd2501bfee48efa5a91
+class: inverse, middle, center
+
+### Regressing GDP on Medal Value
+
+&lt;img src="presentation_files/figure-html/regression-gdp-1.png" width="75%" /&gt;
+
+<<<<<<< HEAD
 ```
 ## parsnip model object
 ## 
@@ -134,20 +112,27 @@ class: inverse, middle, center
 ## (Intercept)          gdp  
 ##   8.0761983    0.0001329
 ```
+=======
+---
+>>>>>>> 62f7ec7544add0817afb6cd2501bfee48efa5a91
 
-```
-## [1] 0.02871318
-```
+class: inverse, middle, center
 
-```
-## # A tibble: 1 × 4
-##   Average_gdp Median_gdp Lowest_gdp Highest_gdp
-##         &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
-## 1      18691.     10851.       124.      97008.
-```
-]
+## Population Regression Statistics 
+
+&lt;img src="img/pop_reg.jpg" width="1000" height="200" style="display: block; margin: auto;" /&gt;
+
 
 ---
+
+class: inverse, middle, center
+
+## Regressing Population on Medal Value 
+
+&lt;img src="presentation_files/figure-html/regression-pop-1.png" width="75%" /&gt;
+
+---
+
 
 # xaringan
 

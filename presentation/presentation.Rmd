@@ -89,12 +89,12 @@ Olympic_collapse <- Olympic_final %>%
 
 class: inverse, center, middle
 
-```{r merging_gdp_with_olympic}
+```{r merging_gdp_with_olympic, echo=FALSE, message=FALSE, warning=FALSE}
    Olympic_final_new <- merge(Olympic_final, gdp_data,
    by=c("Year","Country_Code"))
 ```
 
-```{r summarise-medals-with-gdp}
+```{r summarise-medals-with-gdp, echo=FALSE, message=FALSE, warning=FALSE}
 Olympic_gdp<-Olympic_final_new %>%
    select(Country, Year, gdp, Medal_value, pop) %>%
    group_by(Country, Year, gdp, pop) %>%
@@ -102,15 +102,18 @@ Olympic_gdp<-Olympic_final_new %>%
 ```
 
 
-```{r, echo=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 style_xaringan(
   title_slide_background_image = "img/olympic_rings_on_white_206913.jpg"
 )
 ```
 
 
+<<<<<<< HEAD
 class: inverse, center, middle
 --- 
+=======
+>>>>>>> 62f7ec7544add0817afb6cd2501bfee48efa5a91
 
 ## Introduction page
 
@@ -133,82 +136,93 @@ class: inverse, middle, center
 
 ## North America graph
 
-.pull-right {
-  float: right;
-  width: 50%;
-}
-
-.pull-left {
-  float: left;
-  width: 50%;
-```{r NA, echo=FALSE}
+```{r NA_graph, echo=FALSE}
 Olympic_final %>%
-   filter(Sport == "Athletics") %>%
-   filter(Country == "United States") %>%
-   ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
-   labs(x = "Year", y = "Total Medal Values", 
-   title = "Total Medal Count for Athletics for the United States") +
-   geom_col() +
-   scale_x_continuous(breaks = seq(1996,2008, by = 4), labels = c("1996", "2000", "2004", "2008"))
+   filter(Continent_Name == "North America") %>%
+  ggplot(aes(x = Country, y = Medal_value, fill = Medal)) +
+  geom_col()  +
+  labs(y = "Total Medal Value") +
+  facet_wrap(~ "Continent_Name") +
+  labs(title = "Top Medal Count in North America")
 ```
-}
 
 ---
 
 class: inverse, middle, center
 
-## Cuba vs North America graph 
+## Cuba vs North America Medal Count
 
-.pull-right[
-- Some text
-- goes here
-]
-.pull-left[
-```{r Cuba_US_graph_Total_Medals, echo=FALSE, fig.width=8, warning=FALSE, out.width="100%"}
+```{r Cuba_US_graph_Total_Medals, echo=FALSE, fig.width=8, warning=FALSE, out.width="75%"}
 Olympic_final %>%
    filter(Country == c("United States", "Cuba")) %>%
    ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
-   labs(x = "Year", y = "Total Medal Values", 
-   title = "Total Medal Value for USA and Cuba") +
+   labs(x = "Year", y = "Total Medal Value", 
+   title = "Total Medal Count for USA and Cuba") +
    geom_col() +
    facet_wrap(~ Country) +
    scale_x_continuous(breaks = seq(1996,2008, by = 4), labels = c("1996", "2000", "2004", "2008"))
 ```
-]
  
 
 ---
 
 class: inverse, middle, center
 
-## GDP Regression Plot
+## GDP Regression Statistics 
 
-.pull-right[
-- Some text
-- goes here
-]
-.pull-left[
-```{r gdp-regression, echo=FALSE}
-Olympic_gdp_regression <- linear_reg() %>%
-   set_engine("lm") %>%
-   fit(Medal_value~gdp, data = Olympic_gdp)
+```{r GDP_Stats, echo = FALSE, out.height= 200,out.width=1000, fig.align = "center"}
+knitr::include_graphics("img/GDP_stats.jpg")
 
-Olympic_gdp_regression
 
-glance(Olympic_gdp_regression)$r.squared
- 
-Olympic_gdp %>%
-   ungroup() %>%
-   summarise(
-      Average_gdp = mean(gdp),
-      Median_gdp = median(gdp),
-      Lowest_gdp = min(gdp),
-      Highest_gdp = max(gdp)
-   )
 ```
-]
+
 
 ---
+
+class: inverse, middle, center
+
+### Regressing GDP on Medal Value
+
+```{r regression-gdp, echo=FALSE, message=FALSE, fig.width=8, warning=FALSE, out.width="75%"}
+Olympic_gdp %>%
+ggplot(mapping = aes(x = gdp, y = Medal_value)) +
+  geom_point(alpha = 0.5)+
+  geom_jitter() +
+  geom_smooth(method = "lm", se = FALSE, size = 1) +
+  labs(title = "Regressing GDP on Medal Value", y = "Total Medal Value", x = "GDP")
+```
+
+---
+
+class: inverse, middle, center
+
+## Population Regression Statistics 
+
+```{r pop_stats, echo = FALSE, out.height= 200,out.width=1000, fig.align = "center"}
+knitr::include_graphics("img/pop_reg.jpg")
+
+
+```
+
+
+---
+
+class: inverse, middle, center
+
+## Regressing Population on Medal Value 
+
+```{r regression-pop, echo=FALSE, message=FALSE, fig.width=8, warning=FALSE, out.width="75%"}
+Olympic_gdp %>%
+   filter(pop <= 80000000) %>%
+  ggplot(mapping = aes(x = pop, y = Medal_value)) +
+  geom_point(alpha = 0.5)+
+  geom_jitter(width = 1000000) +
+  geom_smooth(method = "lm", se = FALSE, size = 1) +
+  labs(title = "Regressing Population on Medal Value", y = "Total Medal Value", x = "Population")
+```
+
+---
+
 
 # xaringan
 
