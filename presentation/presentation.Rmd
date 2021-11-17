@@ -163,32 +163,13 @@ Olympic_final %>%
 
 class: inverse, middle, center
 
-## GDP Regression Plot
+## GDP Regression Statics 
 
-.pull-right[
-- Some text
-- goes here
-]
-.pull-left[
-```{r gdp-regression, echo=FALSE}
-Olympic_gdp_regression <- linear_reg() %>%
-   set_engine("lm") %>%
-   fit(Medal_value~gdp, data = Olympic_gdp)
-
-Olympic_gdp_regression
-
-glance(Olympic_gdp_regression)$r.squared
- 
-Olympic_gdp %>%
-   ungroup() %>%
-   summarise(
-      Average_gdp = mean(gdp),
-      Median_gdp = median(gdp),
-      Lowest_gdp = min(gdp),
-      Highest_gdp = max(gdp)
-   )
+```{r GDP_Stats, echo=FALSE}
+style_xaringan(
+  background_image = "img/GDP_regression_stats.jpg")
 ```
-]
+
 
 ---
 
