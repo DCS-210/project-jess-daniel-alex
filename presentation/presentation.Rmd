@@ -165,19 +165,27 @@ class: inverse, middle, center
 
 ## GDP Regression Statics 
 
-```{r GDP_Stats, echo = FALSE, out.width = "60%", fig.align = "center"}
-# style_xaringan(
-#   gdp_regression_image = "img/GDP_regression_stats.jpg"
-# )
-# 
-# style_xaringan(
-#   title_slide_background_image = "img/olympic_rings_on_white_206913.jpg"
-# )
-include_graphics("img/GDP_regression_stats.jpg")
+```{r GDP_Stats, echo = FALSE, out.height= 200,out.width=1000, fig.align = "center"}
+knitr::include_graphics("img/GDP_stats.jpg")
+
+
 ```
 
 
+---
 
+class: inverse, middle, center
+
+### Regression GDP Graph
+
+```{r regression-gdp, echo=FALSE, fig.width=8, warning=FALSE, out.width="75%"}
+Olympic_gdp %>%
+ggplot(mapping = aes(x = gdp, y = Medal_value)) +
+  geom_point(alpha = 0.5)+
+  geom_jitter() +
+   geom_smooth(method = "lm", se = FALSE, size = 1) +
+  labs(title = "GDP Regression For Countries")
+```
 
 ---
 
