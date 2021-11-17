@@ -89,6 +89,19 @@ Olympic_collapse <- Olympic_final %>%
 
 class: inverse, center, middle
 
+```{r merging_gdp_with_olympic}
+   Olympic_final_new <- merge(Olympic_final, gdp_data,
+   by=c("Year","Country_Code"))
+```
+
+```{r summarise-medals-with-gdp}
+Olympic_gdp<-Olympic_final_new %>%
+   select(Country, Year, gdp, Medal_value, pop) %>%
+   group_by(Country, Year, gdp, pop) %>%
+   summarise(Medal_value=n())
+```
+
+
 ```{r, echo=FALSE}
 style_xaringan(
   title_slide_background_image = "img/olympic_rings_on_white_206913.jpg"
@@ -100,8 +113,9 @@ class: inverse, center, middle
 
 ## Introduction page
 
-- Our original question that we wanted research was "which regions are the best at which sport". After analyzing our pros and cons of our data we decided to re do our research question.We decided to analyze out research in comparing USA to other countries in specific areas of sport and comparing  an country’s GDP to how well they medaled in each four of the Olympics. 
-- We created two mutated data sets of our orginal data set to make our analysis of our data easier
+Our original question that we wanted research was "which regions are the best at which sport". After analyzing our pros and cons of our data we decided to re do our research question.We decided to analyze out research in comparing USA to other countries in specific areas of sport and comparing  an country’s GDP to how well they medaled in each four of the Olympics. 
+
+We created two mutated data sets of our orginal data set to make our analysis of our data easier
 
 ---
 
@@ -109,19 +123,24 @@ class: inverse, center, middle
 
 ## What sections/topics we decided to anaylze 
 
--Our first analysis of the data was analyzing the United States against other countries in different athletic advents. We picked the United States because of the probability that we would get data for all four Olympics in our events. For each section of analyzing the Unite States we analyzed them against certain countries that we believed would do well in those events 
+Our first analysis of the data was analyzing the United States against other countries in different athletic advents. We picked the United States because of the probability that we would get data for all four Olympics in our events. For each section of analyzing the Unite States we analyzed them against certain countries that we believed would do well in those events 
 
 
 ---
 
+class: inverse, middle, center
+
 ## North America graph
 
-.pull-right[
-- Some text
-- goes here
-]
-.pull-left[
-```{r NA, echo=FALSE, fig.width=8, warning=FALSE, out.width="100%"}
+.pull-right {
+  float: right;
+  width: 50%;
+}
+
+.pull-left {
+  float: left;
+  width: 50%;
+```{r NA, echo=FALSE}
 Olympic_final %>%
    filter(Sport == "Athletics") %>%
    filter(Country == "United States") %>%
@@ -131,11 +150,7 @@ Olympic_final %>%
    geom_col() +
    scale_x_continuous(breaks = seq(1996,2008, by = 4), labels = c("1996", "2000", "2004", "2008"))
 ```
-]
-
----
-
-
+}
 
 ---
 
@@ -160,6 +175,37 @@ Olympic_final %>%
 ```
 ]
  
+
+---
+
+class: inverse, middle, center
+
+## GDP Regression Plot
+
+.pull-right[
+- Some text
+- goes here
+]
+.pull-left[
+```{r gdp-regression, echo=FALSE}
+Olympic_gdp_regression <- linear_reg() %>%
+   set_engine("lm") %>%
+   fit(Medal_value~gdp, data = Olympic_gdp)
+
+Olympic_gdp_regression
+
+glance(Olympic_gdp_regression)$r.squared
+ 
+Olympic_gdp %>%
+   ungroup() %>%
+   summarise(
+      Average_gdp = mean(gdp),
+      Median_gdp = median(gdp),
+      Lowest_gdp = min(gdp),
+      Highest_gdp = max(gdp)
+   )
+```
+]
 
 ---
 
