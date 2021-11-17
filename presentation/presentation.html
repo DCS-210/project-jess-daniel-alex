@@ -34,28 +34,13 @@ class: center, middle, inverse, title-slide
 class: inverse, center, middle
 
 
-```r
-   Olympic_final_new &lt;- merge(Olympic_final, gdp_data,
-   by=c("Year","Country_Code"))
-```
-
-
-```r
-Olympic_gdp&lt;-Olympic_final_new %&gt;%
-   select(Country, Year, gdp, Medal_value, pop) %&gt;%
-   group_by(Country, Year, gdp, pop) %&gt;%
-   summarise(Medal_value=n())
-```
-
-```
-## `summarise()` has grouped output by 'Country', 'Year', 'gdp'. You can override using the `.groups` argument.
-```
 
 
 
 
-class: inverse, center, middle
---- 
+
+
+
 
 ## Introduction page
 

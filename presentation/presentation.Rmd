@@ -89,12 +89,12 @@ Olympic_collapse <- Olympic_final %>%
 
 class: inverse, center, middle
 
-```{r merging_gdp_with_olympic}
+```{r merging_gdp_with_olympic, echo=FALSE, message=FALSE, warning=FALSE}
    Olympic_final_new <- merge(Olympic_final, gdp_data,
    by=c("Year","Country_Code"))
 ```
 
-```{r summarise-medals-with-gdp}
+```{r summarise-medals-with-gdp, echo=FALSE, message=FALSE, warning=FALSE}
 Olympic_gdp<-Olympic_final_new %>%
    select(Country, Year, gdp, Medal_value, pop) %>%
    group_by(Country, Year, gdp, pop) %>%
@@ -102,14 +102,13 @@ Olympic_gdp<-Olympic_final_new %>%
 ```
 
 
-```{r, echo=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 style_xaringan(
   title_slide_background_image = "img/olympic_rings_on_white_206913.jpg"
 )
 ```
 
-class: inverse, center, middle
---- 
+
 
 ## Introduction page
 
@@ -137,6 +136,7 @@ Olympic_final %>%
    filter(Continent_Name == "North America") %>%
   ggplot(aes(x = Country, y = Medal_value, fill = Medal)) +
   geom_col()  +
+  labs(y = "Total Medal Value") +
   facet_wrap(~ "Continent_Name") +
   labs(title = "Top Medal Count in North America")
 ```
@@ -151,7 +151,7 @@ class: inverse, middle, center
 Olympic_final %>%
    filter(Country == c("United States", "Cuba")) %>%
    ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
-   labs(x = "Year", y = "Total Medal Values", 
+   labs(x = "Year", y = "Total Medal Value", 
    title = "Total Medal Count for USA and Cuba") +
    geom_col() +
    facet_wrap(~ Country) +
