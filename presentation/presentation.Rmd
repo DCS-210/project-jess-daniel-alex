@@ -147,7 +147,7 @@ class: inverse, middle, center
 
 ## Cuba vs North America Medal Count
 
-```{r Cuba_US_graph_Total_Medals, echo=FALSE}
+```{r Cuba_US_graph_Total_Medals, echo=FALSE, fig.width=8, warning=FALSE, out.width="75%"}
 Olympic_final %>%
    filter(Country == c("United States", "Cuba")) %>%
    ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
