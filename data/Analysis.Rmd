@@ -223,6 +223,7 @@ Olympic_gdp %>%
       Highest_gdp = max(gdp)
    )
 ```
+
 ```{r regression-gdp}
 Olympic_gdp %>%
 ggplot(mapping = aes(x = gdp, y = Medal_value)) +
@@ -259,7 +260,8 @@ Olympic_gdp %>%
 ggplot(mapping = aes(x = pop, y = Medal_value)) +
   geom_point(alpha = 0.5)+
   geom_jitter(width = 1000000) +
-   geom_smooth(method = "lm", se = FALSE, size = 1)
+   geom_smooth(method = "lm", se = FALSE, size = 1) +
+  labs(title = "Regressing Population on Medal Value", y = "Total Medal Value", x = "Population")
 ```
 
 ```{r regression-both}

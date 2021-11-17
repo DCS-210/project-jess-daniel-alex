@@ -208,15 +208,12 @@ class: inverse, middle, center
 
 ## Regressing Population on Medal Value 
 
-```{r regression-pop, echo=FALSE, message=FALSE, fig.width=8, warning=FALSE, out.width="75%"}
-Olympic_gdp %>%
-  filter(pop <= 80000000) %>%
-  ggplot(mapping = aes(x = pop, y = Medal_value)) +
-  geom_point(alpha = 0.5)+
-  geom_jitter(width = 1000000) +
-  geom_smooth(method = "lm", se = FALSE, size = 1) +
-  labs(title = "Regressing Population on Medal Value", y = "Total Medal Value", x = "Population")
+```{r pop_stats, echo = FALSE, out.height= 200,out.width=1000, fig.align = "center"}
+knitr::include_graphics("img/reg_pop_medal_value.jpg")
+
+
 ```
+
 
 ---
 
