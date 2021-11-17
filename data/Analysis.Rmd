@@ -86,7 +86,7 @@ Olympic_collapse <- Olympic_final %>%
 ```{r NA_graph}
 Olympic_final %>%
    filter(Continent_Name == "North America") %>%
-  ggplot(aes(x = Country, y = Medal_value, fill=Medal)) +
+  ggplot(aes(x = Country, y = Medal_value, fill = Medal)) +
   geom_col()  +
   facet_wrap(~ "Continent_Name")
 ```
@@ -238,7 +238,7 @@ Olympic_gdp %>%
    filter(pop <= 80000000) %>%
 ggplot(mapping = aes(x = pop, y = Medal_value)) +
   geom_point(alpha = 0.5)+
-  geom_jitter(width=1000000) +
+  geom_jitter(width = 1000000) +
    geom_smooth(method = "lm", se = FALSE, size = 1)
 ```
 
