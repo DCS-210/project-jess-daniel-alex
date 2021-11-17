@@ -206,7 +206,7 @@ class: inverse, middle, center
 
 ## Regressing Population on Medal Value 
 
-```{r reg_pop, echo = FALSE, out.height= 520,out.width=1000, fig.align = "center"}
+```{r reg_pop, echo = FALSE, out.height= 520,out.width=800, fig.align = "center"}
 knitr::include_graphics("img/reg_pop_medal_value.jpg")
 
 
@@ -229,14 +229,20 @@ Olympic_overall_tograph <- pivot_longer(Olympic_overall, cols= c("Bronze", "Silv
   group_by(Country) %>%
   mutate(proportion=value/Medal_sum)
 
-Olympic_overall_tograph %>%
-  filter(Medal_sum>60) %>%
-  mutate(Country_name = factor(Country, levels=c("Russia", "United States", "Australia", "Germany", "China", "Netherlands", "Cuba", "Brazil"))) %>%
-  ggplot(aes(x=Country_name, y=value, fill = variable)) +
-  labs(title = "Winningest Countries in the World", x = "Country", y = "Total Medal Count", fill = "Medal Type") +
-  geom_col() +
-  theme(axis.text.x = element_text(angle = 45))
+# Olympic_overall_tograph %>%
+#   filter(Medal_sum>60) %>%
+#   mutate(Country_name = factor(Country, levels=c("Russia", "United States", "Australia", "Germany", "China", "Netherlands", "Cuba", "Brazil"))) %>%
+#   ggplot(aes(x=Country_name, y=value, fill = variable)) +
+#   labs(title = "Winningest Countries in the World", x = "Country", y = "Total Medal Count", fill = "Medal Type") +
+#   geom_col() +
+#   theme(axis.text.x = element_text(angle = 45))
 ```
+
+```{r overall-graph, echo = FALSE, out.height= 450,out.width=700, fig.align = "center"}
+knitr::include_graphics("img/overall-graph.png")
+
+```
+
 
 ---
 
@@ -255,6 +261,6 @@ class: inverse, middle, center
 
 ## Conclusion
 
-Overall, 
+We initially thought GDP and population would be the forces that lead countries to having more successful Olympic performances. We found those factors to be mostly irrelevant for describing the success of countries. As a result, we can conclude that a country's success must derive from other sources such as a culture being heavily interested in a sport, geographical advantages, or other varying factors. 
 
 
