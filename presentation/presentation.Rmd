@@ -163,7 +163,7 @@ Olympic_final %>%
 
 class: inverse, middle, center
 
-## GDP Regression Statics 
+## GDP Regression Statistics 
 
 ```{r GDP_Stats, echo = FALSE, out.height= 200,out.width=1000, fig.align = "center"}
 knitr::include_graphics("img/GDP_stats.jpg")
@@ -176,7 +176,7 @@ knitr::include_graphics("img/GDP_stats.jpg")
 
 class: inverse, middle, center
 
-### Regression GDP Graph
+### Regressing GDP on Medal Value
 
 ```{r regression-gdp, echo=FALSE, message=FALSE, fig.width=8, warning=FALSE, out.width="75%"}
 Olympic_gdp %>%
@@ -184,8 +184,21 @@ ggplot(mapping = aes(x = gdp, y = Medal_value)) +
   geom_point(alpha = 0.5)+
   geom_jitter() +
   geom_smooth(method = "lm", se = FALSE, size = 1) +
-  labs(title = "GDP Regression For Countries")
+  labs(title = "Regressing GDP on Medal Value", y = "Total Medal Value", x = "GDP")
 ```
+
+---
+
+class: inverse, middle, center
+
+## Population Regression Statistics 
+
+```{r pop_stats, echo = FALSE, out.height= 200,out.width=1000, fig.align = "center"}
+knitr::include_graphics("img/pop_reg.jpg")
+
+
+```
+
 
 ---
 
