@@ -165,9 +165,8 @@ class: inverse, middle, center
 
 ## GDP Regression Statics 
 
-```{r GDP_Stats, echo=FALSE}
-style_xaringan(
-  background_image = "img/GDP_regression_stats.jpg")
+```{r GDP_Stats, echo = FALSE, out.width = "60%", fig.align = "center"}
+include_graphics("img/GDP_regression_stats.jpg")
 ```
 
 

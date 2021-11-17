@@ -75,8 +75,6 @@ h1, h2, h3 {
 .remark-slide-content {
   background-color: var(--background-color);
   font-size: 1rem;
-  background-image: url(img/GDP_regression_stats.jpg);
-  background-size: cover;
   padding: 16px 64px 16px 64px;
   width: 100%;
   height: 100%;
@@ -137,6 +135,8 @@ a, a > code {
 }
 .title-slide {
   background-color: var(--title-slide-background-color);
+  background-image: url("img/olympic_rings_on_white_206913.jpg");
+  background-size: cover;
 }
 .title-slide .remark-slide-number {
   display: none;
