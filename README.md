@@ -1,6 +1,6 @@
-Project title
+Olympic Performances
 ================
-by Team name
+by Shoes
 
 ## Summary
 
@@ -26,12 +26,18 @@ Our presentation can be found [here](presentation/presentation.html).
 
 ## Data
 
-Include a citation for your data here. See
-<http://libraryguides.vu.edu.au/c.php?g=386501&p=4347840> for guidance
-on proper citation for datasets. If you got your data off the web, make
-sure to note the retrieval date.
+D. Agrawal, Summer Olympics Medals (1976-2008), electronic dataset, Kaggle. (2020). (viewed November 1, 2021), https://www.kaggle.com/divyansh22/summer-olympics-medals.
+
+Core, List Of Continent Codes, electronic dataset, Datahub. (2017). (viewed November 3, 2021), https://datahub.io/core/continent-codes#data-cli.
 
 ## References
 
-List any references here. You should, at a minimum, list your data
-source.
+https://www.kaggle.com/divyansh22/summer-olympics-medals
+
+https://datahub.io/core/continent-codes#data-cli
+
+https://stackoverflow.com/questions/69998377/ggplot-fill-by-proportion-with-a-geom-col
+
+https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf
+
+http://www.flutterbys.com.au/stats/downloads/slides/figure/factors.pdf
