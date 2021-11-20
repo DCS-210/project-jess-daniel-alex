@@ -7,18 +7,24 @@ output: github_document
 
 ## Summary
 
-Write-up of your project and findings go here. 
-Think of this as the text of your presentation. 
-The length should be roughly 5 minutes when read out loud.
-Although pacing varies, a 5-minute speech is roughly 750 words. 
-To use the word count addin, select the text you want to count the words of (probably this is the 
-Summary section of this document, go to Addins, and select the `Word count` addin).
-This addin counts words using two different algorithms, but the results should be similar and as long as you're in the ballpark of 750 words, you're good! 
-The addin will ignore code chunks and only count the words in prose.
+Writeup
 
-You can also load your data here and present any analysis results / plots, but I strongly urge you to keep that to a minimum (maybe only the most important graphic, if you have one you can choose). 
-And make sure to hide your code with  `echo = FALSE` unless the point you are trying to make is about the code itself.
-Your results with proper output and graphics go in your presentation, this space is for a brief summary of your project.
+Info on Dataset:
+For this project, we loaded in data from four different datasets. The first dataset we used was a tally of all the Summer Olympic medal winners between 1976-2012. The second dataset we used was a csv file that contained country names, country codes and continent names and codes, which we merged with the Summer Olympic medal file so that we could compare how certain continents performed in the Olympic games. By doing this, we created a new file called Olympic_final, which was the csv file that we used to make the graphs for most of the project. In addition, we used another dataset called gdp_data, which was a csv file that contained GDP data for every country during this time period. The fourth dataset we used was the dev tools library package, gapminder, which had some GDP and population data in it. While working with the data, we realized that the names of certain countries have changed dramatically and that countries as a whole have ceased and formed, especially around the end of the Cold War. Therefore, to accommodate for these issues, we decided to filter our data and only use data between the years of 1996 and 2008. By shortening the data, we believed that we would get better analysis of the Olympic results. 
+
+
+Research Question:
+Originally, our research question was: Which regions are the best in which specific sport? However, as we moved along with our project and began working with the data almost every day, our priorities and interests changed as well. Now, we can best define what our research question has turned into as: Do population and GDP have an impact on the amount of medals won at the Olympics? We have worked with our data for weeks now, merging, joining and running regressions on it to see if our original question can be answered. While we do not have a concrete answer on which region is the best in which specific sports, we have come to analyze our data on a deeper level, by seeing how population trends and overall economic development of countries has affected how they perform on the Olympic stage.
+
+
+Methodology:
+Overall, we really worked to understand what our data was trying to tell us after we had merged a few datasets together and joined our data. Our goal was to comprehend all of these different data entries across several decades and numerous wars to see what has changed and how socio-economic and geo-political divides have had an impact on the Olympic games and which countries perform best at what sports. We also realised these factors that we chose, might not be the only factors to influence this question. To be able to make our project work, we had to turn medals into numeric values (Gold = 3, Silver = 2, Bronze = 1), so that we could quantify what each medal is worth and which Countries overall performed the best and won the most total medals.
+
+
+Findings:
+Our findings, to be fair, very much surprised us and were not what we were expecting in the slightest bit. After making numerous graphs that showed how the world powers were dominating the Summer Olympic games and sitting atop the leaderboards of the medal count, we determined that in fact, there is little to no correlation that proves there is a relationship between GDP and medals in the Summer Olympics. The R2 value of GDP and medals won at the Summer Olympics was 0.012. This finding really shocked us, as all we kept seeing were graphs that were led by the United States, the United Kingdom, Russia and China to some extent. Therefore, as we were leading up to the process of making our regressions, we were almost certain that there would be at least a moderate relationship between GDP and medals in the Olympics. Obviously, we proved ourselves wrong, as we determined this was indeed not the case. Afterwards, we then decided to put the population to the test. We thought that if there was no relationship between GDP and medals won, there had to at least be a relationship between population and medals won. The more people you have in your country, the more people you can send to the Olympics in numerous  different events. It turns out that we were again very wrong. We found there to be a 0.0521 R2  value between population and medal value, which can be interpreted as little to no relationship between the two variables. Again, our inklings had been proven wrong. Altogether, while our initial predictions for the relationship of GDP and medal values and Population and medal values were both very off, it was fascinating to discover the truth about these relationships and see how even while analyzing data for such a long period of time, your initial guess can be very off and simply be disproved by an easy R2  calculation.
+
+
 
 ```{r load-data, echo = FALSE}
 Summer_olympics <- read_csv("data/Summer-Olympic-medals-1976-to-2008.csv")
@@ -31,11 +37,11 @@ Our presentation can be found [here](presentation/presentation.html).
 
 ## Data
 
-Include a citation for your data here. 
-See http://libraryguides.vu.edu.au/c.php?g=386501&p=4347840 for guidance on proper citation for datasets. 
-If you got your data off the web, make sure to note the retrieval date.
+Original data set CSV file:
+https://www.kaggle.com/divyansh22/summer-olympics-medals
+
 
 ## References
 
-List any references here. You should, at a minimum, list your data source.
+D. Agrawal, Summer Olympics medals (1976-2008), electronic dataset, Kaggle. (2020). (viewed November 19, 2021), https://www.kaggle.com/divyansh22/summer-olympics-medals.
 
