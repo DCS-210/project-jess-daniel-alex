@@ -96,7 +96,8 @@ Olympic_overall_tograph <- pivot_longer(Olympic_overall, cols= c("Bronze", "Silv
 Olympic_overall_tograph %>%
   filter(Medal_sum>60) %>%
   mutate(Country_name = factor(Country, levels=c("Russia", "United States", "Australia", "Germany", "China", "Netherlands", "Cuba", "Brazil"))) %>%
-  ggplot(aes(x=Country_name, y=value, fill = variable)) +
+  mutate(variable_ordered = factor(variable, levels = c("Gold", "Silver", "Bronze"))) %>%
+  ggplot(aes(x=Country_name, y=value, fill = variable_ordered)) +
   labs(title = "Winningest Countries in the World", x = "Country", y = "Total Medal Count", fill = "Medal Type") +
   geom_col() +
   theme(axis.text.x = element_text(angle = 45))
