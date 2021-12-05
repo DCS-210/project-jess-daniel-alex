@@ -47,12 +47,14 @@ gdp_data <- read_csv("gdp_data.csv")
 Olympic_final <- Summer_olympics %>%
    left_join(
       Country_codes, 
-      by = c("Country_Code" = "Three_Letter_Country_Code") ) %>%
+      by = c("Country_Code" = "Three_Letter_Country_Code") 
+      ) %>%
    mutate(
       Medal_value = case_when(
       Medal == "Gold" ~ 3,
       Medal == "Silver" ~ 2,
-      Medal == "Bronze" ~ 1)) %>%
+      Medal == "Bronze" ~ 1)
+      ) %>%
    filter(Year == c(1996, 2000, 2004, 2008)) %>%
    left_join(
       gapminder,
@@ -81,7 +83,7 @@ Olympic_collapse <- Olympic_final %>%
       Country %in% c("Zimbabwe", "Nigeria", "South Africa", "Algeria") ~ "Africa",  
        TRUE    ~ Continent_Name)) %>%
   relocate(Continent_Name, .after = Country) %>%
-   count(Continent_Name = Continent_Name)%>%
+  count(Continent_Name = Continent_Name)%>%
   pivot_wider(names_from = Medal, values_from = n) %>%
   mutate_all(~replace(., is.na(.), 0)) %>%
   relocate(Gold, .after = Silver) 
@@ -90,8 +92,17 @@ Olympic_collapse <- Olympic_final %>%
 class: inverse, center, middle
 
 ```{r merging_gdp_with_olympic, echo=FALSE, message=FALSE, warning=FALSE}
-   Olympic_final_new <- merge(Olympic_final, gdp_data,
+Olympic_final_new <- merge(Olympic_final, gdp_data,
    by=c("Year","Country_Code"))
+```
+
+```{r merging-gdp-with-olympics-ljoin, echo=FALSE, message=FALSE, warning=FALSE}
+gdp_data_ljoin<-gdp_data %>%
+  group_by(Country_Code) %>%
+  summarise(gdpmean = mean(gdp)) 
+
+Olympic_test_final_ljoin <- Olympic_final %>%
+  left_join(gdp_data_ljoin, by = c("Country_Code" = "Country_Code"))
 ```
 
 ```{r summarise-medals-with-gdp, echo=FALSE, message=FALSE, warning=FALSE}
@@ -137,7 +148,7 @@ class: inverse, middle, center
 
 ## North America graph
 
-```{r NA_graph, echo=FALSE}
+```{r NA_graph, echo=FALSE, fig.alt = "The sum of weighted medals (Gold=3, Silver=2, Bronze=1) by each country in North America from 1996 to 2008."}
 Olympic_final %>%
    filter(Continent_Name == "North America") %>%
    mutate(Country_name = factor(Country, levels=c("United States", "Cuba", "Canada", "Jamaica", "Mexico", "Dominican Republic"))) %>%
@@ -156,7 +167,7 @@ class: inverse, middle, center
 
 ## Cuba vs North America Medal Count
 
-```{r Cuba_US_graph_Total_Medals, echo=FALSE, fig.width=8, warning=FALSE, out.width="75%"}
+```{r Cuba_US_graph_Total_Medals, echo=FALSE, fig.width=8, warning=FALSE, out.width="75%", fig.alt = "Comparisson of Cuba vs United States medal count by year."}
 Olympic_final %>%
    filter(Country == c("United States", "Cuba")) %>%
   mutate(variable = factor(Medal, levels = c("Gold", "Silver", "Bronze"))) %>%
@@ -174,7 +185,7 @@ class: inverse, middle, center
 
 ## GDP Regression Statistics 
 
-```{r GDP_Stats, echo = FALSE, out.height= 200,out.width=1000, fig.align = "center"}
+```{r GDP_Stats, echo = FALSE, fig.alt = "Summary statistics of regressing GDP on medal count.", out.height= 200,out.width=1000, fig.align = "center"}
 knitr::include_graphics("img/GDP_stats.jpg")
 ```
 
@@ -185,13 +196,14 @@ class: inverse, middle, center
 
 ### Regressing GDP on Medal Value
 
-```{r regression-gdp, echo=FALSE, message=FALSE, fig.width=8, warning=FALSE, out.width="75%"}
+```{r regression-gdp, echo=FALSE, message=FALSE, fig.width=8, warning=FALSE, out.width="75%", fig.alt = "Visualization of the regression that was GDP's effect on medal value. Each point is a country."}
 Olympic_gdp %>%
-ggplot(mapping = aes(x = gdp, y = Medal_value)) +
+  ggplot(mapping = aes(x = gdp, y = Medal_value)) +
   geom_point(alpha = 0.5)+
   geom_jitter() +
   geom_smooth(method = "lm", se = FALSE, size = 1) +
-  labs(title = "Regressing GDP on Medal Value", y = "Total Medal Value", x = "GDP")
+  labs(title = "Regressing GDP on Medal Value",
+       y = "Total Medal Value", x = "GDP")
 ```
 
 ---
@@ -200,7 +212,7 @@ class: inverse, middle, center
 
 ## Population Regression Statistics 
 
-```{r pop_stats, echo = FALSE, out.height= 200,out.width=1000, fig.align = "center"}
+```{r pop_stats, echo = FALSE, out.height= 200,out.width=1000, fig.align = "center", fig.alt = "Summary statistics of regressing population on medal count."}
 knitr::include_graphics("img/pop_reg.jpg")
 ```
 
@@ -211,7 +223,7 @@ class: inverse, middle, center
 
 ## Regressing Population on Medal Value 
 
-```{r reg_pop, echo = FALSE, out.height= 520,out.width=800, fig.align = "center"}
+```{r reg_pop, echo = FALSE, out.height= 520,out.width=800, fig.align = "center", fig.alt = "Visualization of population's effect on medal value. Each point is a country."}
 knitr::include_graphics("img/reg_pop_medal_value.jpg")
 ```
 
@@ -241,9 +253,8 @@ Olympic_overall_tograph <- pivot_longer(Olympic_overall, cols= c("Bronze", "Silv
 #   theme(axis.text.x = element_text(angle = 45))
 ```
 
-```{r overall-graph, echo = FALSE, out.height= 450,out.width=700, fig.align = "center"}
+```{r overall-graph, echo = FALSE, out.height= 450,out.width=700, fig.align = "center", fig.alt = "Graph of the most winningest countries from 1996-2008."}
 knitr::include_graphics("img/OverallGraphWorld.png")
-
 ```
 
 
