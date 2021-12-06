@@ -47,12 +47,14 @@ gdp_data <- read_csv("gdp_data.csv")
 Olympic_final <- Summer_olympics %>%
    left_join(
       Country_codes, 
-      by = c("Country_Code" = "Three_Letter_Country_Code") ) %>%
+      by = c("Country_Code" = "Three_Letter_Country_Code") 
+      ) %>%
    mutate(
       Medal_value = case_when(
       Medal == "Gold" ~ 3,
       Medal == "Silver" ~ 2,
-      Medal == "Bronze" ~ 1)) %>%
+      Medal == "Bronze" ~ 1)
+      ) %>%
    filter(Year == c(1996, 2000, 2004, 2008)) %>%
    left_join(
       gapminder,
@@ -81,7 +83,7 @@ Olympic_collapse <- Olympic_final %>%
       Country %in% c("Zimbabwe", "Nigeria", "South Africa", "Algeria") ~ "Africa",  
        TRUE    ~ Continent_Name)) %>%
   relocate(Continent_Name, .after = Country) %>%
-   count(Continent_Name = Continent_Name)%>%
+  count(Continent_Name = Continent_Name)%>%
   pivot_wider(names_from = Medal, values_from = n) %>%
   mutate_all(~replace(., is.na(.), 0)) %>%
   relocate(Gold, .after = Silver) 
@@ -90,8 +92,17 @@ Olympic_collapse <- Olympic_final %>%
 class: inverse, center, middle
 
 ```{r merging_gdp_with_olympic, echo=FALSE, message=FALSE, warning=FALSE}
-   Olympic_final_new <- merge(Olympic_final, gdp_data,
+Olympic_final_new <- merge(Olympic_final, gdp_data,
    by=c("Year","Country_Code"))
+```
+
+```{r merging-gdp-with-olympics-ljoin, echo=FALSE, message=FALSE, warning=FALSE}
+gdp_data_ljoin<-gdp_data %>%
+  group_by(Country_Code) %>%
+  summarise(gdpmean = mean(gdp)) 
+
+Olympic_test_final_ljoin <- Olympic_final %>%
+  left_join(gdp_data_ljoin, by = c("Country_Code" = "Country_Code"))
 ```
 
 ```{r summarise-medals-with-gdp, echo=FALSE, message=FALSE, warning=FALSE}
@@ -113,7 +124,11 @@ style_xaringan(
 
 ## Introduction
 
-Our original question that we wanted research was "which regions are the best at which sport". After analyzing our pros and cons of our data we decided to re do what we wanted to research. We decided to analyze our research in comparing USA to other countries the medal count and comparing  an country’s GDP to how well they medaled in each four of the Olympics. 
+Our original question that we wanted research was "which regions are the best at which sport."
+
+After analyzing our pros and cons of our data we decided to change our  question by comparing the USA to other countries the medal count 
+
+Then we added related country’s GDP to how well they medal-ed in each of the Olympics. 
 
 We created four mutated data sets of our orginal data set to make our analysis of our data easier.
 
@@ -123,7 +138,9 @@ class: inverse, center, middle
 
 ## What sections/topics we decided to anaylze 
 
-Our first analysis of the data was analyzing the United States against other countries in the overall amount of medals won throughout the four Olympics. We picked the United States because of the probability that we would get data for all four Olympics. In addition, we ended up regressing both GDP and Population on the medal count to see if our original hypothesis was correct.
+Our first analysis of the data was analyzing the United States against other countries in the overall amount of medals won throughout the four Olympics. 
+
+We ended up regressing both GDP and Population on the medal count to see if our original hypothesis was correct.
 
 ---
 
@@ -131,14 +148,17 @@ class: inverse, middle, center
 
 ## North America graph
 
-```{r NA_graph, echo=FALSE}
+```{r NA_graph, echo=FALSE, fig.alt = "The sum of weighted medals (Gold=3, Silver=2, Bronze=1) by each country in North America from 1996 to 2008."}
 Olympic_final %>%
    filter(Continent_Name == "North America") %>%
-  ggplot(aes(x = Country, y = Medal_value, fill = Medal)) +
+   mutate(Country_name = factor(Country, levels=c("United States", "Cuba", "Canada", "Jamaica", "Mexico", "Dominican Republic"))) %>%
+  mutate(variable_ordered = factor(Medal, levels = c("Gold", "Silver", "Bronze"))) %>%
+  ggplot(aes(x = Country_name, y = Medal_value, fill = variable_ordered)) +
   geom_col()  +
-  labs(y = "Total Medal Value") +
-  labs(title = "Medal Count in North America") +
-   theme(axis.text.x = element_text(angle = 10))
+  labs(y = "Total Medal Value", x = "Country") +
+  labs(title = "Medal Count in North America", fill = "Medal Type") +
+  theme(axis.text.x = element_text(angle = 10)) +
+  coord_flip()
 ```
 
 ---
@@ -147,10 +167,11 @@ class: inverse, middle, center
 
 ## Cuba vs North America Medal Count
 
-```{r Cuba_US_graph_Total_Medals, echo=FALSE, fig.width=8, warning=FALSE, out.width="75%"}
+```{r Cuba_US_graph_Total_Medals, echo=FALSE, fig.width=8, warning=FALSE, out.width="75%", fig.alt = "Comparisson of Cuba vs United States medal count by year."}
 Olympic_final %>%
    filter(Country == c("United States", "Cuba")) %>%
-   ggplot(aes(x = Year, y = Medal_value, fill = Medal)) + 
+  mutate(variable = factor(Medal, levels = c("Gold", "Silver", "Bronze"))) %>%
+   ggplot(aes(x = Year, y = Medal_value, fill = variable)) + 
    labs(x = "Year", y = "Total Medal Value", title = "Total Medal Count for USA and Cuba") +
    geom_col() +
    facet_wrap(~Country) +
@@ -164,10 +185,8 @@ class: inverse, middle, center
 
 ## GDP Regression Statistics 
 
-```{r GDP_Stats, echo = FALSE, out.height= 200,out.width=1000, fig.align = "center"}
+```{r GDP_Stats, echo = FALSE, fig.alt = "Summary statistics of regressing GDP on medal count.", out.height= 200,out.width=1000, fig.align = "center"}
 knitr::include_graphics("img/GDP_stats.jpg")
-
-
 ```
 
 
@@ -177,13 +196,14 @@ class: inverse, middle, center
 
 ### Regressing GDP on Medal Value
 
-```{r regression-gdp, echo=FALSE, message=FALSE, fig.width=8, warning=FALSE, out.width="75%"}
+```{r regression-gdp, echo=FALSE, message=FALSE, fig.width=8, warning=FALSE, out.width="75%", fig.alt = "Visualization of the regression that was GDP's effect on medal value. Each point is a country."}
 Olympic_gdp %>%
-ggplot(mapping = aes(x = gdp, y = Medal_value)) +
+  ggplot(mapping = aes(x = gdp, y = Medal_value)) +
   geom_point(alpha = 0.5)+
   geom_jitter() +
   geom_smooth(method = "lm", se = FALSE, size = 1) +
-  labs(title = "Regressing GDP on Medal Value", y = "Total Medal Value", x = "GDP")
+  labs(title = "Regressing GDP on Medal Value",
+       y = "Total Medal Value", x = "GDP")
 ```
 
 ---
@@ -192,10 +212,8 @@ class: inverse, middle, center
 
 ## Population Regression Statistics 
 
-```{r pop_stats, echo = FALSE, out.height= 200,out.width=1000, fig.align = "center"}
+```{r pop_stats, echo = FALSE, out.height= 200,out.width=1000, fig.align = "center", fig.alt = "Summary statistics of regressing population on medal count."}
 knitr::include_graphics("img/pop_reg.jpg")
-
-
 ```
 
 
@@ -205,10 +223,8 @@ class: inverse, middle, center
 
 ## Regressing Population on Medal Value 
 
-```{r reg_pop, echo = FALSE, out.height= 520,out.width=800, fig.align = "center"}
+```{r reg_pop, echo = FALSE, out.height= 520,out.width=800, fig.align = "center", fig.alt = "Visualization of population's effect on medal value. Each point is a country."}
 knitr::include_graphics("img/reg_pop_medal_value.jpg")
-
-
 ```
 
 
@@ -237,9 +253,8 @@ Olympic_overall_tograph <- pivot_longer(Olympic_overall, cols= c("Bronze", "Silv
 #   theme(axis.text.x = element_text(angle = 45))
 ```
 
-```{r overall-graph, echo = FALSE, out.height= 450,out.width=700, fig.align = "center"}
-knitr::include_graphics("img/overall-graph.png")
-
+```{r overall-graph, echo = FALSE, out.height= 450,out.width=700, fig.align = "center", fig.alt = "Graph of the most winningest countries from 1996-2008."}
+knitr::include_graphics("img/OverallGraphWorld.png")
 ```
 
 
@@ -251,7 +266,6 @@ class: inverse, middle, center
 
 ```{r lims_of_data, echo = FALSE, out.height= 450,out.width=900, fig.align = "center"}
 knitr::include_graphics("img/confused1.png")
-
 ```
 
 ---
@@ -260,6 +274,10 @@ class: inverse, middle, center
 
 ## Conclusion
 
-We initially thought GDP and population would be the forces that lead countries to having more successful Olympic performances. We found those factors to be mostly irrelevant for describing the success of countries. As a result, we can conclude that a country's success must derive from other sources such as a culture being heavily interested in a sport, geographical advantages, or other varying factors. 
+We initially thought GDP and population would be the forces that lead countries to having more successful Olympic performances.
+
+We found those factors to be mostly irrelevant for describing the success of countries.
+
+As a result, we can conclude that a country's success must derive from other sources such as a culture being heavily interested in a sport, geographical advantages, or other varying factors. 
 
 
